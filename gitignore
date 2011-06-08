@@ -1,4 +1,24 @@
-.DS_Store
-.svn
+# Mostly from https://github.com/github/gitignore
+
+############################## OS X ##############################
+
+.DS_Store?
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+############################## emacs ##############################
+
 *~
-.*.swp
+\#*\#
+.\#*
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp

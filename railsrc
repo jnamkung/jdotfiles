@@ -1,20 +1,79 @@
 #!/usr/bin/ruby
+# -*- ruby -*-
 
 begin
-  require 'hirb' # sudo gem install cldwalker-hirb --source http://gems.github.com
+  require 'hirb'
   Hirb.enable
 rescue LoadError
 end
 
 def change_log(stream)
+  Rails.logger = Logger.new(stream)
   ActiveRecord::Base.logger = Logger.new(stream)
   ActiveRecord::Base.clear_active_connections!
+  ActionController::Base.logger = Logger.new STDOUT
 end
 
 def show_log
   change_log(STDOUT)
+  nil
 end
 
 def hide_log
   change_log(nil)
+  nil
+end
+
+# def how_to_load_a_rake_task
+#   require 'rake'
+#   Rails.application.load_tasks
+#   Rake::Task['routes'].invoke
+#   Rake::Task['routes'].reenable
+# end
+
+def show_routes(string = nil)
+
+  string = string.to_s
+
+  # lifted from gems/railties-3.0.3/lib/rails/tasks/routes.rake
+
+  Rails.application.reload_routes!
+  all_routes = Rails.application.routes.routes
+
+  if ENV['CONTROLLER']
+    all_routes = all_routes.select{ |route| route.defaults[:controller] == ENV['CONTROLLER'] }
+  end
+
+  routes = all_routes.collect do |route|
+
+    reqs = route.requirements.dup
+    reqs[:to] = route.app unless route.app.class.name.to_s =~ /^ActionDispatch::Routing/
+    reqs = reqs.empty? ? "" : reqs.inspect
+
+    {:name => route.name.to_s, :verb => route.verb.to_s, :path => route.path, :reqs => reqs}
+  end
+
+  routes.reject! { |r| r[:path] =~ %r{/rails/info/properties} } # Skip the route if it's internal info route
+
+  name_width = routes.map{ |r| r[:name].length }.max
+  verb_width = routes.map{ |r| r[:verb].length }.max
+  path_width = routes.map{ |r| r[:path].length }.max
+
+  ansi_bold       = "\033[1m"
+  ansi_reset      = "\033[0m"
+  ansi_lgray    = "\033[0;37m"
+  ansi_gray     = "\033[1;30m"
+
+  routes.each do |r|
+    if string.nil? or r[:path].index(string) or r[:name].index(string) or r[:reqs].index(string)
+      line = "#{r[:name].rjust(name_width)} #{r[:verb].ljust(verb_width)} #{r[:path].ljust(path_width)} #{r[:reqs]}"
+
+      unless string.nil?
+        line.gsub!(string, "#{ansi_bold}#{string}#{ansi_reset}")
+      end
+
+      puts line
+    end
+  end
+  nil
 end

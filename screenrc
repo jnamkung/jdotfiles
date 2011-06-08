@@ -1,0 +1,28 @@
+# Set the screen key to control-]
+escape ^]\\
+
+startup_message off
+
+#termcap  xterm 'AF=\E[3%dm:AB=\E[4%dm'
+#terminfo xterm 'AF=\E[3%p1%dm:AB=\E[4%p1%dm'
+#termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+
+# Make the output buffer large for (fast) xterms.
+#termcapinfo xterm* OL=10000
+
+#backtick 1 0 0 whoami
+#caption always "%>%{kw}%1`@%H %{bw}%?%-Lw%?%{bW}%n*%f %t%?(%u)%?%{bw}%?%+Lw%?%"
+
+#screen  -h 0 emacs -nw
+#screen  -h 100 
+
+
+defscrollback 10000
+
+bind b eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"
+
+vbell on  
+
+# turn off screen locking
+bind x
+bind ^x

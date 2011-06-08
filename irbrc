@@ -1,4 +1,6 @@
 #!/usr/bin/ruby
+# -*- ruby -*-
+
 require 'irb/completion'
 require 'irb/ext/save-history'
 
@@ -7,11 +9,20 @@ IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
-%w[rubygems looksee/shortcuts wirble].each do |gem|
+%w[rubygems looksee/shortcuts].each do |gem|
   begin
     require gem
   rescue LoadError
   end
+end
+
+begin
+  require 'wirble'
+  Wirble.init
+  Wirble.colorize
+  require 'hirb' # sudo gem install cldwalker-hirb --source http://gems.github.com
+  Hirb.enable
+rescue LoadError
 end
 
 class Object
