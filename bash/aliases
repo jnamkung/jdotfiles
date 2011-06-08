@@ -1,15 +1,32 @@
-. ~/.zsh/aliases
+# -*- sh -*- 
 
-# changing directory to code project
-function c { cd ~/code/$1; }
-
-# alternative to "rails" command to use templates
-function railsapp {
-  template=$1
-  appname=$2
-  shift 2
-  rails $appname -m http://github.com/ryanb/rails-templates/raw/master/$template.rb $@
-}
-
-# misc
+# Changing directory to code project
+function p { cd ~/Projects/$1; }
+	
+# Misc
 alias reload='. ~/.bash_profile'
+alias fack="find . | grep -v '~' | ack -i $*"
+alias ll="ls -l"
+alias la='ls -A'
+alias l='ls -CF'
+alias e="emacs"
+alias tdb="cd ~/Dropbox/Dickson\\ Labs/treesdb"
+alias m="mate"
+alias r3="rvm use 1.9.2-head@rails3"
+alias rr="rake routes | less -S"
+alias rdm="rake db:migrate"
+alias hol="cd ~/Projects/hol/"
+alias holr="cd ~/Projects/hol-rails/"
+alias ackphp="ack --ignore-dir=tests --php"
+alias dush="du -sh ."
+
+alias g='git'
+alias gs='git status'
+alias gc='git commit'
+alias gca='git commit -a'
+alias ga='git add'
+alias gco='git checkout'
+alias gb='git branch'
+alias gm='git merge'
+alias gd='git diff'
+alias gl='git log'
