@@ -3,6 +3,7 @@
 ## For the Mac
 
 * Install homebrew
+
     https://github.com/mxcl/homebrew/wiki/installation
 
 * Install xcode. Chris has it floating around somewhere. Make sure to skip iOS development, it'll save you 15 minutes.
@@ -10,9 +11,11 @@
 * Install git
 
 * Install rvm
+
     bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
 
 * Install dotfiles
+
     mkdir ~/Projects
     cd ~/Projects
     clone team@dicksonlabs.com:git/dotfiles.git
@@ -21,6 +24,7 @@
     rake install
 
 * Install emacs 23 (to keep the dotfiles happy)
+
     brew install emacs
 
 ## Github
