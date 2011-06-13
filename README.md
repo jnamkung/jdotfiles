@@ -4,7 +4,7 @@ copied from Ryan Bates
 
 ## Installation
 
-  rake
+    rake
 
 ## Features
 
@@ -25,7 +25,7 @@ and control-left/right will move to beginning and end of line.
 Control-option-N will open a new tab with the current directory under
 Mac OS X Terminal.
 
-If there are some shell configuration settings which you want secure or
-specific to one system, place it into a ~/.localrc file. This will be
-loaded automatically if it exists.
+If there are some shell configuration settings which you want secure
+or specific to one system, place it into a ~/.localrc file. This will
+be loaded automatically if it exists.
 

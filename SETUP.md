@@ -49,8 +49,7 @@
 
     brew install readline
 
-### Run the RVM command it tells you to run with the GNU readline you
-  just installed (version number will probably have changed)
+### Run the RVM command it tells you to run with the GNU readline you just installed (version number will probably have changed)
 
     rvm install ruby-1.9.2-head --with-readline-dir=/usr/local/Cellar/readline/6.2.1/
     gem install bundler
