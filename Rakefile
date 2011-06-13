@@ -2,19 +2,29 @@ require 'rake'
 require 'erb'
 
 desc "install the dot files into user's home directory"
-task :install do
+task :default => [:install]
+task :install => [:submodules, :files]
+
+task :submodules do
+  puts 'updating submodules ...'
+  system('git submodule init') and system('git submodule update')
+  puts '... done updating submodules.'
+end
+
+task :files do
+  puts 'updating files ...'
   replace_all = false
   Dir['*'].each do |file|
-    next if %w[Rakefile README.rdoc LICENSE].include? file
+    next if %w[Rakefile README.md LICENSE SETUP.md mac-terminals].include? file
     next if file =~ /~$/
-    
+
     if File.exist?(File.join(ENV['HOME'], ".#{o(file)}"))
       if File.identical? file, File.join(ENV['HOME'], ".#{o(file)}")
         puts "identical ~/.#{o(file)}"
       elsif replace_all
         replace_file(file)
       else
-        print "overwrite ~/.#{o(file)}? [ynaq] "
+        print "overwrite ~/.#{o(file)}? [ynaq] (return skips) "
         case $stdin.gets.chomp
         when 'a'
           replace_all = true
@@ -31,6 +41,7 @@ task :install do
       link_file(file)
     end
   end
+  puts '... done updating files.'
 end
 
 def o(file)

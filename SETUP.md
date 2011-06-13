@@ -6,7 +6,7 @@
 
     https://github.com/mxcl/homebrew/wiki/installation
 
-* Install xcode. Chris has it floating around somewhere. Make sure to skip iOS development, it'll save you 15 minutes.
+* Install xcode. Make sure to skip iOS development, it'll save you 15 minutes.
 
 * Install git
 
@@ -18,10 +18,8 @@
 
     mkdir ~/Projects
     cd ~/Projects
-    clone team@dicksonlabs.com:git/dotfiles.git
-    cd dotfiles
-    git submodule init; git submodule update
-    rake install
+    git@github.com:dicksonlabs/dotfiles.git
+    rake
 
 * Install emacs 23 (to keep the dotfiles happy)
 
@@ -30,23 +28,30 @@
 ## Github
 
 * Make your ssh public keys
+
     ssh-keygen
 
 * Add a public key
+
     https://github.com/account/ssh
 
-* Checkout a project. HOL for example:
-    git clone git@github.com:HOL/hol-rails.git
+* Checkout a project.
+
+    git clone your-project-name
 
 ## RVM
 
 * cd to a project directory that uses rvm
+
     cd ~/Projects/...
 
-* Install GNU readline. This
+* Install GNU readline
+
     brew install readline
 
-* Run the RVM command it tells you to run with the GNU readline you installed earlier
+* Run the RVM command it tells you to run with the GNU readline you
+  just installed (version number will probably have changed)
+
     rvm install ruby-1.9.2-head --with-readline-dir=/usr/local/Cellar/readline/6.2.1/
     gem install bundler
     bundle
@@ -55,7 +60,11 @@
 
 * Install SIMBL
 * Download TerminalColours
+
     http://github.com/timmfin/terminalcolours/raw/master/TerminalColours-SL-64bit.zip
-* Install TerminalColours bundle into `~/Library/Application\ Support/SIMBL/Plugins`
+
+* Install TerminalColours bundle into
+
+    ~/Library/Application\ Support/SIMBL/Plugins
 
 
