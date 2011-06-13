@@ -3,18 +3,19 @@
 copied from Ryan Bates
 
 ## Installation
+
 Run:
 
     rake
 
 ## Features
 
-p <dir> will cd to your Projects directory
+``p <dir>`` will cd to your Projects directory
 
 Tab completion is also added to rake and cap commands:
 
-  rake db:mi<tab>
-  cap de<tab>
+    rake db:mi<tab>
+    cap de<tab>
 
 To speed things up, the results are cached in local .rake_tasks~ and
 .cap_tasks~. It is smart enough to expire the cache automatically in
