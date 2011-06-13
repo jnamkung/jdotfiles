@@ -3,6 +3,7 @@
 copied from Ryan Bates
 
 ## Installation
+Run:
 
     rake
 
