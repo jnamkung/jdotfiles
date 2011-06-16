@@ -77,3 +77,11 @@ def show_routes(string = nil)
   end
   nil
 end
+
+module ActiveRecord
+  class Relation
+    def to_sql_formatted
+      to_sql.gsub(/([A-Z][A-Z\s]+)/) { |m| "\n#{m}" }
+    end
+  end
+end

@@ -2,8 +2,6 @@
 (defun load-lib (name) (load (concat root-dir name ".el")))
 (defun load-lib-dir (path) (add-to-list 'load-path (concat root-dir path)))
 (load-lib-dir ".")
-(load-lib-dir "yasnippet")
-(load-lib-dir "feature-mode")
 
 ;;;; Setup
 (menu-bar-mode 0)
@@ -21,11 +19,14 @@
 (add-to-list 'auto-mode-alist '("\.md$" . markdown-mode))
 
 ;; yasnippet
+(load-lib-dir "yasnippet")
 (require 'yasnippet)
 (setq yas/root-directory (concat root-dir "yasnippet/snippets"))
 (yas/load-directory yas/root-directory)
+(yas/initialize)
 
 ;; feature
+(load-lib-dir "feature-mode")
 (require 'feature-mode)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 
@@ -64,11 +65,6 @@
 ;; coffee
 (add-to-list 'load-path "~/.emacs.d/coffee-mode")
 (require 'coffee-mode)
-
-;; If coffee-mode is not enabled automatically for any files ending in
-;; ".coffee" or named "Cakefile", add this to your emacs config as
-;; well:
-
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 
