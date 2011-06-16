@@ -30,10 +30,6 @@
 (require 'feature-mode)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 
-;; html
-(setq auto-mode-alist (append '(("\\.phtml$" . html-mode)
-				("\\.php$" . html-mode)
-				) auto-mode-alist))
 ;; css
 (autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
@@ -56,7 +52,10 @@
                                 ("Gemfile"   . ruby-mode)
 				) auto-mode-alist))
 
-
+;; rhtml
+(load-lib-dir "rhtml-minor-mode")
+(require 'rhtml-mode)
+;; (add-hook 'rhtml-mode-hook (lambda () (rinari-launch)))
 
 ;; yaml
 (require 'yaml-mode)
@@ -87,7 +86,6 @@
 (autoload 'io-mode "io-mode" "Mode for editing Io files" t)
 (add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
 
-
 ;; scheme
 ;; (require 'quack)
 ;; (custom-set-variables
@@ -105,11 +103,8 @@
 ;;   ;; If there is more than one, they won't work right.
 ;;  )
 
-
 ;; Save squiggle files somewhere out of the way
 (setq backup-directory-alist '(("." . "~/.saves")))
 
 (require 'haml-mode)
-(setq haml-mode-hook
-    (function (lambda ()
-                (setq indent-tabs-mode nil))))
+(setq haml-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
