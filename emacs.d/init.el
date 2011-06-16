@@ -53,7 +53,7 @@
 				) auto-mode-alist))
 
 ;; rhtml
-(load-lib-dir "rhtml")
+(load-lib-dir "rhtml-mode")
 (require 'rhtml-mode)
 ;; (add-hook 'rhtml-mode-hook (lambda () (rinari-launch)))
 
