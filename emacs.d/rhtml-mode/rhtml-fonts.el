@@ -117,7 +117,7 @@ colorization."
     (((class color) (min-colors 16) (background light))
      :background "azure")
     (((class color) (min-colors 8))
-     :background "blue")
+     :background "black")		;was blue
     (((type tty) (class mono))
      :inverse-video t)
     (t :background "gray"))
