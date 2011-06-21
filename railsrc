@@ -48,7 +48,13 @@ def show_routes(string = nil)
 
     reqs = route.requirements.dup
     reqs[:to] = route.app unless route.app.class.name.to_s =~ /^ActionDispatch::Routing/
-    reqs = reqs.empty? ? "" : reqs.inspect
+    reqs = if reqs.empty?
+             ""
+           elsif reqs[:controller]
+             reqs[:controller] + '#' + reqs[:action]
+           else
+             reqs.inspect
+           end
 
     {:name => route.name.to_s, :verb => route.verb.to_s, :path => route.path, :reqs => reqs}
   end
@@ -66,7 +72,12 @@ def show_routes(string = nil)
 
   routes.each do |r|
     if string.nil? or r[:path].index(string) or r[:name].index(string) or r[:reqs].index(string)
-      line = "#{r[:name].rjust(name_width)} #{r[:verb].ljust(verb_width)} #{r[:path].ljust(path_width)} #{r[:reqs]}"
+      line = [
+              r[:name].rjust(name_width),
+              r[:verb].ljust(verb_width),
+              r[:path].ljust(path_width),
+              r[:reqs]
+             ].join(' ')
 
       unless string.nil?
         line.gsub!(string, "#{ansi_bold}#{string}#{ansi_reset}")
