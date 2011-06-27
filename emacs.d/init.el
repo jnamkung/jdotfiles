@@ -5,12 +5,20 @@
 
 ;;;; Setup
 (menu-bar-mode 0)
+(setq inhibit-startup-echo-area-message t)
+(setq inhibit-startup-message t)
+(setq initial-major-mode (quote text-mode))
+(setq initial-scratch-message nil)
 
 ;;;; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;;; Shortcuts
-(global-set-key "\M-g" 'goto-line)
+(global-set-key (kbd "M-g") 'goto-line)
+(global-set-key (quote [27 up]) (quote scroll-down))
+(global-set-key (quote [27 down]) (quote scroll-up))
+(global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
+(global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
 
 ;;;; Modes
 
@@ -108,3 +116,4 @@
 
 (require 'haml-mode)
 (setq haml-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
+
