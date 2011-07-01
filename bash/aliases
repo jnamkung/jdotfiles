@@ -1,8 +1,10 @@
-# -*- sh -*- 
+# -*- sh -*-
 
 # Changing directory to code project
-function p { cd ~/Projects/$1; }
-	
+function p  { cd ~/Projects/$1; }
+function db { cd ~/Dropbox/$1; }
+function j  { cd ~/Junk/$1; }
+
 # Misc
 alias reload='. ~/.bash_profile'
 alias fack="find . | grep -v '~' | ack -i $*"
