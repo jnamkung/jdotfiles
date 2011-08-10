@@ -26,6 +26,9 @@
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\.md$" . markdown-mode))
 
+;; slim
+(require 'slim-mode)
+
 ;; yasnippet
 (load-lib-dir "yasnippet")
 (require 'yasnippet)
@@ -94,26 +97,12 @@
 (autoload 'io-mode "io-mode" "Mode for editing Io files" t)
 (add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
 
-;; scheme
-;; (require 'quack)
-;; (custom-set-variables
-;;   ;; custom-set-variables was added by Custom.
-;;   ;; If you edit it by hand, you could mess it up, so be careful.
-;;   ;; Your init file should contain only one such instance.
-;;   ;; If there is more than one, they won't work right.
-;;  '(gud-gdb-command-name "gdb --annotate=1")
-;;  '(large-file-warning-threshold nil)
-;;  '(quack-programs (quote ("/Applications/mit-scheme.app/Contents/Resources/mit-scheme" "/Applications/mit-scheme.app" "bigloo" "csi" "csi -hygienic" "gosh" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-schem" "mit-scheme" "mred -z" "mzscheme" "mzscheme -M errortrace" "mzscheme -il r6rs" "mzscheme -il typed-scheme" "mzscheme3m" "mzschemecgc" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi"))))
-;; (custom-set-faces
-;;   ;; custom-set-faces was added by Custom.
-;;   ;; If you edit it by hand, you could mess it up, so be careful.
-;;   ;; Your init file should contain only one such instance.
-;;   ;; If there is more than one, they won't work right.
-;;  )
+;; haml
+(require 'haml-mode)
+(setq haml-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
+
+
 
 ;; Save squiggle files somewhere out of the way
 (setq backup-directory-alist '(("." . "~/.saves")))
-
-(require 'haml-mode)
-(setq haml-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
 
