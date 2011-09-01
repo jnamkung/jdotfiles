@@ -46,13 +46,6 @@
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
 (autoload 'rainbow-mode "rainbow-mode")
 
-;; js
-(autoload 'espresso-mode "espresso" nil t)
-(setq auto-mode-alist (append '(("\\.js\\'" . espresso-mode)
-				("\\.json$" . espresso-mode)
-				("\\.js.erb$" . espresso-mode)
-				) auto-mode-alist))
-
 ;; ruby
 (autoload 'ruby-mode "ruby-mode" "Major mode for ruby files" t)
 (setq auto-mode-alist (append '(("\\.rb$"   . ruby-mode)
