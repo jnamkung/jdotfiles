@@ -18,7 +18,7 @@ if tmux has-session -t $PROJECT 2>/dev/null
 then
     tmux attach -t $PROJECT
 else
-    tmux new-session -s $PROJECT -d #-n server
+    tmux new-session -s $PROJECT -d -n server
     tmux send-keys   -t $PROJECT:0 "cd .; rails s -p 2600" C-m
 
     tmux new-window  -t $PROJECT -n emacs
