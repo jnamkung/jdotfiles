@@ -1,0 +1,40 @@
+#!/bin/sh
+
+if [ $# -eq 1 ]
+then
+    if [ -d $1 ]
+    then
+	cd $1
+    else
+	echo "directory $1 not found"
+	exit 1
+    fi
+fi
+
+tmux start-server
+PROJECT=`basename $PWD`
+
+if tmux has-session -t $PROJECT 2>/dev/null
+then
+    tmux attach -t $PROJECT
+else
+    tmux new-session -s $PROJECT -d #-n server
+    tmux send-keys   -t $PROJECT:0 "cd .; rails s -p 2600" C-m
+
+    tmux new-window  -t $PROJECT -n emacs
+    tmux send-keys   -t $PROJECT:1 "emacs" C-m
+
+    tmux new-window  -t $PROJECT -n shell
+   #tmux send-keys   -t $PROJECT:2 C-l
+
+    tmux new-window  -t $PROJECT -n console
+    tmux send-keys   -t $PROJECT:3 "cd .; rails c" C-m
+
+    tmux new-window  -t $PROJECT -n db
+    tmux send-keys   -t $PROJECT:4 "cd .; rails db" C-m
+
+    tmux select-window  -t $PROJECT:2
+    tmux attach-session -t $PROJECT
+fi
+
+
