@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Usage:
+#   tmux-rails
+#   tmux-rails directory-with-project-in-it
+
 if [ $# -eq 1 ]
 then
     if [ -d $1 ]
@@ -11,15 +15,17 @@ then
     fi
 fi
 
-tmux start-server
 PROJECT=`basename $PWD`
+PORT=`ruby -e 'puts (ARGV[0][0].upcase.ord - 65) + (ARGV[0][-1].upcase.ord - 65) * 100 + 3000' $PROJECT`
+
+tmux start-server
 
 if tmux has-session -t $PROJECT 2>/dev/null
 then
     tmux attach -t $PROJECT
 else
     tmux new-session -s $PROJECT -d -n server
-    tmux send-keys   -t $PROJECT:0 "cd .; rails s -p 2600" C-m
+    tmux send-keys   -t $PROJECT:0 "rails s -p $PORT" C-m
 
     tmux new-window  -t $PROJECT -n emacs
     tmux send-keys   -t $PROJECT:1 "emacs" C-m
