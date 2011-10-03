@@ -7,3 +7,9 @@ export ACK_PAGER='less'
 export GREP_OPTIONS='--color=auto'
 export LESS=' -FXR'
 declare -x CLICOLOR=1
+
+# FreeBSD quirk; make sure we pick up ~/.shrc if something drops us
+# into the not-quite-bourne shell (/bin/sh)
+if [ -z "$ENV" ]; then
+   export ENV=$HOME/.shrc
+fi
