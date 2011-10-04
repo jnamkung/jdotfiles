@@ -94,7 +94,8 @@
 (require 'haml-mode)
 (setq haml-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
 
-
+;; ack
+(require 'ack)
 
 ;; Save squiggle files somewhere out of the way
 (setq backup-directory-alist '(("." . "~/.saves")))
