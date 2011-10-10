@@ -32,3 +32,5 @@ alias gb='git branch'
 alias gm='git merge'
 alias gd='git diff'
 alias gl='git log'
+
+alias ber='bundle exec rspec'

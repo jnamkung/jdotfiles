@@ -19,7 +19,9 @@
 (global-set-key (quote [27 down]) (quote scroll-up))
 (global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
 (global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
-(global-set-key (kbd "M-/") 'hippie-expand)
+
+;; ack
+(require 'ack)
 
 ;; Save squiggle files somewhere out of the way
 (setq backup-directory-alist '(("." . "~/.saves")))
