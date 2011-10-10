@@ -1,5 +1,5 @@
 # If this is read by only the login shell then the paths won't grow
 # duplicates in subshells, I think. Include it in .bash_profile and not .bashrc
 
-export PATH=/opt/local/bin:/opt/local/sbin:$HOME/.scripts:$PATH
+export PATH=$HOME/.scripts:/usr/local/bin:/opt/local/sbin:/opt/local/bin:$PATH
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
