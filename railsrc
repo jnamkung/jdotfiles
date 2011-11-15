@@ -4,6 +4,16 @@
 begin
   require 'hirb'
   Hirb.enable
+
+  def hirbv
+    Hirb.disable
+    Hirb.enable :output => {"ActiveRecord::Base" => {:class => :auto_table, :options => {:vertical => true}}}
+  end
+
+  def hirbh
+    Hirb.disable
+    Hirb.enable :output => {"ActiveRecord::Base" => {:class => :auto_table, :options => {:vertical => false}}}
+  end
 rescue LoadError
 end
 
