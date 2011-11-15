@@ -28,7 +28,7 @@ else
     tmux send-keys   -t $PROJECT:0 "rails s -p $PORT" C-m
 
     tmux new-window  -t $PROJECT -n emacs
-    TERM=xterm-256color tmux send-keys   -t $PROJECT:1 "emacs" C-m
+    tmux send-keys   -t $PROJECT:1 "TERM=xterm-256color emacs" C-m
 
     tmux new-window  -t $PROJECT -n shell
    #tmux send-keys   -t $PROJECT:2 C-l
