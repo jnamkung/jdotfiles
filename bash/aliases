@@ -34,3 +34,4 @@ alias gd='git diff'
 alias gl='git log'
 
 alias ber='bundle exec rspec'
+alias be='bundle exec'
