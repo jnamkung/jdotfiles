@@ -55,15 +55,3 @@
     gem install bundler
     bundle
 
-## Terminal setup
-
-### Install SIMBL
-### Download TerminalColours
-
-    http://github.com/timmfin/terminalcolours/raw/master/TerminalColours-SL-64bit.zip
-
-### Install TerminalColours bundle into
-
-    ~/Library/Application\ Support/SIMBL/Plugins
-
-
