@@ -39,8 +39,8 @@ else
     tmux new-window  -t $PROJECT -n db
     tmux send-keys   -t $PROJECT:4 "cd .; rails db" C-m
 
-    tmux new-window  -t $PROJECT -n spork
-    tmux send-keys   -t $PROJECT:5 "cd .; spork" C-m
+    tmux new-window  -t $PROJECT -n guard
+    tmux send-keys   -t $PROJECT:5 "cd .; guard" C-m
 
     tmux select-window  -t $PROJECT:2
     tmux attach-session -t $PROJECT
