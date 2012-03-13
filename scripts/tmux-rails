@@ -34,13 +34,13 @@ else
    #tmux send-keys   -t $PROJECT:2 C-l
 
     tmux new-window  -t $PROJECT -n console
-    tmux send-keys   -t $PROJECT:3 "cd .; rails c" C-m
+    tmux send-keys   -t $PROJECT:3 "cd .; bundle exec rails c" C-m
 
     tmux new-window  -t $PROJECT -n db
-    tmux send-keys   -t $PROJECT:4 "cd .; rails db" C-m
+    tmux send-keys   -t $PROJECT:4 "cd .; bundle exec rails db" C-m
 
     tmux new-window  -t $PROJECT -n guard
-    tmux send-keys   -t $PROJECT:5 "cd .; guard" C-m
+    tmux send-keys   -t $PROJECT:5 "cd .; bundle exec guard" C-m
 
     tmux select-window  -t $PROJECT:2
     tmux attach-session -t $PROJECT
