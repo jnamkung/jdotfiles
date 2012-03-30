@@ -82,3 +82,9 @@
 ;; haml
 (require 'haml-mode)
 (setq haml-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
+
+;; color-themes
+(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/color-theme.el")
+(require 'color-theme)
+(add-to-list 'load-path "~/.emacs.d/emacs-color-theme-solarized/")
+(require 'color-theme-solarized)
