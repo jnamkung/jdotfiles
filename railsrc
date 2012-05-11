@@ -17,6 +17,10 @@ begin
 rescue LoadError
 end
 
+begin
+  require ENV['HOME'] + '/.localrailsrc.rb'
+end
+
 def change_log(stream)
   Rails.logger = Logger.new(stream)
   ActiveRecord::Base.logger = Logger.new(stream)
@@ -135,6 +139,10 @@ module ActiveRecord
   class Relation
     def to_sql_formatted
       to_sql.gsub(/([A-Z][A-Z\s]+)/) { |m| "\n#{m}" }
+    end
+
+    def most(field, having=0)
+      group(field).select("count(#{field}) AS total").having("total >= #{having}").order("total DESC")
     end
   end
 end
