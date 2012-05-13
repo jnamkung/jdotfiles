@@ -56,7 +56,7 @@ reverse_list () {
     shift
     while [ $1 ]
     do
-        rev=$1$IFS$rev
+        rev=$1${IFS:0:1}$rev
         shift
     done
     echo -n "$rev"

@@ -94,6 +94,13 @@
 (require 'haml-mode)
 (setq haml-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
 
+;; scala
+(add-to-list 'load-path "/usr/local/share/scala/misc/scala-tool-support/emacs")
+(require 'scala-mode-auto)
+(add-hook 'scala-mode-hook
+			 '(lambda ()
+				 (yas/minor-mode-on)
+				 ))
 
 
 ;; Save squiggle files somewhere out of the way
