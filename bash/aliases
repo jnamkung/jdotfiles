@@ -4,7 +4,7 @@
 function p  { cd ~/Projects/$1; }
 function db { cd ~/Dropbox/$1; }
 function j  { cd ~/Junk/$1; }
-
+function bcd { cd `bundle show $1`; }
 # Misc
 alias reload='. ~/.bash_profile'
 alias fack="find . | grep -v '~' | ack -i $*"
@@ -32,3 +32,6 @@ alias gb='git branch'
 alias gm='git merge'
 alias gd='git diff'
 alias gl='git log'
+
+alias ber='bundle exec rspec'
+alias be='bundle exec'

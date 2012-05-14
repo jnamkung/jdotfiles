@@ -1,0 +1,6 @@
+#name : <div class="box"></div>
+#group : custom
+# --
+<div class="box">
+  $0
+</div>

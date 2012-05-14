@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Usage:
+#   tmux-rails
+#   tmux-rails directory-with-project-in-it
+
 if [ $# -eq 1 ]
 then
     if [ -d $1 ]
@@ -11,27 +15,32 @@ then
     fi
 fi
 
-tmux start-server
 PROJECT=`basename $PWD`
+PORT=`ruby -e 'puts (ARGV[0][0].upcase.ord - 65) + (ARGV[0][-1].upcase.ord - 65) * 100 + 3000' $PROJECT`
+
+tmux start-server
 
 if tmux has-session -t $PROJECT 2>/dev/null
 then
     tmux attach -t $PROJECT
 else
     tmux new-session -s $PROJECT -d -n server
-    tmux send-keys   -t $PROJECT:0 "cd .; rails s -p 2600" C-m
+    tmux send-keys   -t $PROJECT:0 "rails s -p $PORT" C-m
 
     tmux new-window  -t $PROJECT -n emacs
-    tmux send-keys   -t $PROJECT:1 "emacs" C-m
+    tmux send-keys   -t $PROJECT:1 "TERM=xterm-256color emacs" C-m
 
     tmux new-window  -t $PROJECT -n shell
    #tmux send-keys   -t $PROJECT:2 C-l
 
     tmux new-window  -t $PROJECT -n console
-    tmux send-keys   -t $PROJECT:3 "cd .; rails c" C-m
+    tmux send-keys   -t $PROJECT:3 "cd .; bundle exec rails c" C-m
 
     tmux new-window  -t $PROJECT -n db
-    tmux send-keys   -t $PROJECT:4 "cd .; rails db" C-m
+    tmux send-keys   -t $PROJECT:4 "cd .; bundle exec rails db" C-m
+
+    tmux new-window  -t $PROJECT -n guard
+    tmux send-keys   -t $PROJECT:5 "cd .; bundle exec guard" C-m
 
     tmux select-window  -t $PROJECT:2
     tmux attach-session -t $PROJECT

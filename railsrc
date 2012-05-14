@@ -4,7 +4,21 @@
 begin
   require 'hirb'
   Hirb.enable
+
+  def hirbv
+    Hirb.disable
+    Hirb.enable :output => {"ActiveRecord::Base" => {:class => :auto_table, :options => {:vertical => true}}}
+  end
+
+  def hirbh
+    Hirb.disable
+    Hirb.enable :output => {"ActiveRecord::Base" => {:class => :auto_table, :options => {:vertical => false}}}
+  end
 rescue LoadError
+end
+
+begin
+  require ENV['HOME'] + '/.localrailsrc.rb'
 end
 
 def change_log(stream)
@@ -32,6 +46,37 @@ end
 # end
 
 def show_routes(string = nil)
+  if Rails.version =~ /^3.2/
+    show_routes_thee_two(string)
+  else
+    show_routes_legacy(string)
+  end
+end
+
+def show_routes_thee_two(match = nil)
+  Rails.application.reload_routes!
+  all_routes = Rails.application.routes.routes
+
+  require 'rails/application/route_inspector'
+  inspector = Rails::Application::RouteInspector.new
+
+  routes = inspector.format(all_routes, ENV['CONTROLLER'])
+
+  ansi_bold       = "\033[1m"
+  ansi_reset      = "\033[0m"
+
+  if (match)
+    match = match.to_s
+    puts routes.grep(/#{match}/).map { |r|
+      r.gsub!(match, "#{ansi_bold}#{match}#{ansi_reset}")
+    }.join("\n")
+
+  else
+    puts routes.join "\n"
+  end
+end
+
+def show_routes_legacy(string = nil)
 
   string = string.to_s
 
@@ -89,10 +134,15 @@ def show_routes(string = nil)
   nil
 end
 
+
 module ActiveRecord
   class Relation
     def to_sql_formatted
       to_sql.gsub(/([A-Z][A-Z\s]+)/) { |m| "\n#{m}" }
+    end
+
+    def most(field, having=0)
+      group(field).select("count(#{field}) AS total").having("total >= #{having}").order("total DESC")
     end
   end
 end

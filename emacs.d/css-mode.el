@@ -16,12 +16,12 @@
 ;; modify it under the terms of the GNU General Public License as
 ;; published by the Free Software Foundation; either version 2 of
 ;; the License, or (at your option) any later version.
-;; 
+;;
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-;; 
+;;
 ;; You should have received a copy of the GNU General Public
 ;; License along with this program; if not, write to the Free
 ;; Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
@@ -69,7 +69,7 @@
   :group 'css
   :type  'boolean)
 
-(defcustom css-indent-offset 4
+(defcustom css-indent-offset 2
   "Number of spaces to indent lines in CSS mode"
   :group 'css
   :type  'integer)
@@ -103,7 +103,7 @@
 (defvar css-element-keywords nil
   "Common CSS elements" )
 (if css-element-keywords nil
-  (setq css-element-keywords 
+  (setq css-element-keywords
         '("A" "ADDRESS" "B" "BLOCKQUOTE" "BODY" "BR" "CITE"
           "CODE" "DIR" "DIV" "DD" "DL" "DT" "EM" "FORM" "H1"
           "H2" "H3" "H4" "H5" "H6" "HR" "I" "IMG" "KBD" "LI"

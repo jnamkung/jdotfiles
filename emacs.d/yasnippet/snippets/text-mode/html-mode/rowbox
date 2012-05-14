@@ -1,0 +1,10 @@
+#name : row > column > box <div id='column'></div>
+#group : custom
+# --
+<div class="row">
+  <div class="column grid_16">
+    <div class="box">
+      $0
+    </div>
+  </div>
+</div>

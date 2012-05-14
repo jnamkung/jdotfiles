@@ -13,3 +13,6 @@ declare -x CLICOLOR=1
 if [ -z "$ENV" ]; then
    export ENV=$HOME/.shrc
 fi
+
+export HISTSIZE=65535
+export HISTFILESIZE=$HISTSIZE

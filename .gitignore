@@ -1,5 +1,11 @@
 # vi[m] droppings
 *~
+
 # emacs scat
 \#*#
 .#*
+
+# for Mac users
+.DS_Store
+
+emacs.d/abbrev_defs
