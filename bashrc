@@ -18,6 +18,7 @@ fi
 
 # rvm startup alters $PATH; do it before sourcing ~/.bash/paths
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # Set aliases in ~/.bash/aliases
 # Set prompts and whatnot in ~/.bash/config
@@ -37,4 +38,5 @@ elif [ -f $HOME/.local ]; then
     # backwards compatibility with poorly-named local bash rc file
     source ~/.local
 fi
+
 # Don't put anything after this: .bashrc_local should override anything in here
