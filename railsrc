@@ -19,6 +19,7 @@ end
 
 begin
   require ENV['HOME'] + '/.localrailsrc.rb'
+rescue LoadError
 end
 
 def change_log(stream)
