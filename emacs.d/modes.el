@@ -1,9 +1,9 @@
 ;;;; Modes
 
 ;; zencoding for html
-(load-lib-dir "zencoding-mode")
-(require 'zencoding-mode)
-(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+;; (load-lib-dir "zencoding-mode")
+;; (require 'zencoding-mode)
+;; (add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 
 ;; scss
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/folder-where-you-put-scss-mode-el"))
@@ -25,9 +25,9 @@
 (yas/initialize)
 
 ;; feature
-(load-lib-dir "feature-mode")
-(require 'feature-mode)
-(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
+;; (load-lib-dir "feature-mode")
+;; (require 'feature-mode)
+;; (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 
 ;; css
 (autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
@@ -93,3 +93,11 @@
 (require 'color-theme)
 (add-to-list 'load-path "~/.emacs.d/emacs-color-theme-solarized/")
 (require 'color-theme-solarized)
+
+;; scala
+(add-to-list 'load-path "~/.emacs.d/scala-mode")
+(require 'scala-mode-auto)
+(add-hook 'scala-mode-hook
+			 '(lambda ()
+				 (yas/minor-mode-on)
+				 ))
