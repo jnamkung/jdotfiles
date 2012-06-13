@@ -1,95 +1,10 @@
-# Add some user and/or local paths to $PATH and $MANPATH
+# -*- sh -*-
 
-###
-### Add your dirs to [pre|post]PATH and [pre|post]MANPATH below.
-###   Dirs already in your PATH/MANPATH won't be added.
-###   Dirs that don't exist on your system won't be added.
-###   Dirs will be *prepended* to your PATH/MANPATH, order preserved.
-###
+# If this is read by only the login shell then the paths won't grow
+# duplicates in subshells, I think.
 
-prePATH="/usr/local/mysql/bin:/usr/local/git/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin"
+# Source this file with .bash_profile and not .bashrc
 
-postPATH="$HOME/bin:$HOME/.scripts:$HOME/.rvm/bin"
-
-preMANPATH="/usr/local/mysql/man:/usr/local/git/man:/usr/local/man:/opt/local/man"
-
-postMANPATH="$HOME/man:$HOME/.rvm/man"
-
-# Note on $MANPATH, $extraMANPATH
-# we don't want to set $MANPATH if the system/user is using another
-#   mechanism to find man pages (e.g. manpath(1) on ubuntu or freebsd),
-#   because setting MANPATH could clobber that mechanism.
-# manpath(1) will use $PATH to find man pages; for the most
-#   part, if you add something to [pre|post]PATH, then manpath(1) will
-#   pick up your corresponding man pages.
-
-
-##
-## Function definitions
-##
-
-list_contains () {
-    eval p=\$$1
-    for dir in $p
-    do
-        if [ "$dir" == "$2" ]; then
-           return 0
-        fi
-    done
-    return 1
-}
-
-prepend_to_listvar () {
-    if [ -d $2 ] && ! ( list_contains "$1" "$2" ) ; then
-        eval "$1=$2${IFS:0:1}\$$1"
-    fi
-}
-
-append_to_listvar () {
-    if [ -d $2 ] && ! ( list_contains "$1" "$2" ) ; then
-        eval "$1=\$$1${IFS:0:1}$2"
-    fi
-}
-
-reverse_list () {
-    rev=$1
-    shift
-    while [ $1 ]
-    do
-        rev=$1${IFS:0:1}$rev
-        shift
-    done
-    echo -n "$rev"
-}
-
-##
-## End function definitions
-##
-
-# we're going to work with paths separated by ":" instead of whitespace
-IFS=:
-
-for dir in $( reverse_list $prePATH )
-do
-    prepend_to_listvar PATH "$dir"
-done
-
-for dir in $postPATH
-do
-    append_to_listvar PATH "$dir"
-done
-
-if [ -n "$MANPATH" ]; then
-    for dir in $( reverse_list $preMANPATH )
-    do
-        prepend_to_listvar MANPATH "$dir"
-    done
-    for dir in $postMANPATH
-    do
-        append_to_listvar MANPATH "$dir"
-    done
-fi
-
-# put IFS back
-unset IFS
+export PATH=$HOME/.scripts:/usr/local/bin:/opt/local/sbin:/opt/local/bin:$PATH
+export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 

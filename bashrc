@@ -1,42 +1,25 @@
-# Read by subshells. Login shells source this file via .bash_profile
+# -*- sh -*-
+
+# This is read by subshells. Login shells source this file via .bash_profile
 #
-
-# Fix GNU screen's 256-color terminal setttings
-if [ $STY ]; then
-    # we're running inside GNU screen...
-    if [ -n "$TERMCAP" ]; then
-        # ...where the $TERMCAP screen sets is wrong for 256-color terminals...
-        if (( `expr "$TERM" : '.*256col'` )); then
-            # ...so we blow it away, assuming either the system-wide
-            # termcap will have something better, or we have
-            # taken advantage of $TERMPATH and/or .termcap, or
-            # we'll be setting $TERMCAP ourselves after this
-            unset TERMCAP
-        fi
-    fi
-fi
-
-# rvm startup alters $PATH; do it before sourcing ~/.bash/paths
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 # Set aliases in ~/.bash/aliases
 # Set prompts and whatnot in ~/.bash/config
-# Set paths in ~/.bash/paths
-# Add bash-completions to ~/.bash/completions
+# Set prompts in ~/.bash/paths
+#
+# Don't set PATH here because it'll keep growing.  Source paths in bash_profile
 
-source $HOME/.bash/paths
-source $HOME/.bash/aliases
-source $HOME/.bash/completions
-source $HOME/.bash/config
+# These don't carry through to subshells so they go here instead of
+# .bash_profile
 
+source ~/.bash/aliases
+source ~/.bash/completions
+source ~/.bash/config
+source ~/.bash/`uname`
 
-# Use .bashrc_local for your local or user settings
-if [ -f $HOME/.bashrc_local ]; then
-    source ~/.bashrc_local
-elif [ -f $HOME/.local ]; then
-    # backwards compatibility with poorly-named local bash rc file
-    source ~/.local
+# Use .localrc for settings specific to one system.
+if [ -f ~/.localrc ]; then
+    source ~/.localrc
 fi
 
-# Don't put anything after this: .bashrc_local should override anything in here
+# RVM comes last
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

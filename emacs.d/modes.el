@@ -1,5 +1,10 @@
 ;;;; Modes
 
+;; zencoding for html
+(load-lib-dir "zencoding-mode")
+(require 'zencoding-mode)
+(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+
 ;; scss
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/folder-where-you-put-scss-mode-el"))
 (autoload 'scss-mode "scss-mode")
