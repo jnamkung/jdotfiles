@@ -14,7 +14,7 @@
 source ~/.bash/aliases
 source ~/.bash/completions
 source ~/.bash/config
-source ~/.bash/`uname`
+source ~/.bash/colorfixes
 
 # Use .localrc for settings specific to one system.
 if [ -f ~/.localrc ]; then

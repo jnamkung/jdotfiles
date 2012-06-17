@@ -1,3 +1,6 @@
+# use 256 colors
+term screen-256color
+
 # Set the screen key to control-]
 escape ^]\\
 
@@ -14,14 +17,13 @@ startup_message off
 #caption always "%>%{kw}%1`@%H %{bw}%?%-Lw%?%{bW}%n*%f %t%?(%u)%?%{bw}%?%+Lw%?%"
 
 #screen  -h 0 emacs -nw
-#screen  -h 100 
-
+#screen  -h 100
 
 defscrollback 10000
 
 bind b eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"
 
-vbell on  
+vbell on
 
 # turn off screen locking
 bind x
