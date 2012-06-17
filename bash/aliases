@@ -8,6 +8,13 @@ function bcd { cd `bundle show $1`; }
 # Misc
 alias reload='. ~/.bash_profile'
 alias fack="find . | grep -v '~' | ack -i $*"
+if ls --color -d . >/dev/null 2>&1; then
+    #GNU ls
+    alias ls="ls --color=auto"
+elif ls -G -d . >/dev/null 2>&1; then
+    #BSD ls
+    declare -x CLICOLOR=1
+fi
 alias ll="ls -l"
 alias la='ls -A'
 alias l='ls -CF'
