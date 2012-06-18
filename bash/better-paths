@@ -9,9 +9,6 @@
 # ###   Dirs will be *prepended* to your PATH/MANPATH, order preserved.
 # ###
 
-echo "HOME is     " $HOME
-echo "PATH is     " $PATH
-
 prePATH="$HOME/bin:$HOME/.scripts:$HOME/.rvm/bin:/usr/local/mysql/bin:/usr/local/git/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin"
 
 postPATH=""
@@ -45,12 +42,7 @@ list_contains () {
 }
 
 prepend_to_listvar () {
-    echo "testing " $2
-    if (list_contains "$1" "$2") ; then
-	echo $1 "contains " $2
-    fi
     if [ -d $2 ] && ! ( list_contains "$1" "$2" ) ; then
-	echo "prepending " $2
         eval "$1=$2${IFS:0:1}\$$1"
     fi
 }
@@ -96,33 +88,36 @@ IFS=:
 
 if (list_contains PATH "/usr/local/bin") || (list_contains PATH "/usr/local/bin/") ; then
     move_to_front PATH "/usr/local/bin"
-    PATH = "/usr/local/bin:$PATH"
 fi
 
 for dir in $( reverse_list $prePATH )
 do
-    prepend_to_listvar PATH "$dir"
+    if [[ -d $dir ]] || [[ -h $dir ]] ; then
+	prepend_to_listvar PATH "$dir"
+    fi
 done
 
 for dir in $postPATH
 do
-    append_to_listvar PATH "$dir"
+    if ( [ -d $dir ] || [ -h $dir ] ) ; then
+	append_to_listvar PATH "$dir"
+    fi
 done
 
 if [ -n "$MANPATH" ]; then
     for dir in $( reverse_list $preMANPATH )
     do
-        prepend_to_listvar MANPATH "$dir"
+        if ( [ -d $dir ] || [ -h $dir ] ) ; then
+            prepend_to_listvar MANPATH "$dir"
+	fi
     done
     for dir in $postMANPATH
     do
-        append_to_listvar MANPATH "$dir"
+        if ( [ -d $dir ] || [ -h $dir ] ) ; then
+            append_to_listvar MANPATH "$dir"
+	fi
     done
-    export MANPATH
 fi
 
 # # put IFS back
 unset IFS
-
-echo "PATH is now " $PATH
-export PATH
