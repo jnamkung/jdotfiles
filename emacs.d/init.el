@@ -28,6 +28,9 @@
 
 (load-lib "modes")
 
+(if (file-exists-p (setq local-init-file "~/.emacs_local.el"))
+    (load local-init-file))
+
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
