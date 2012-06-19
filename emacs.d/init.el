@@ -28,6 +28,15 @@
 
 (load-lib "modes")
 
+(defun dotfiles-facefixes ()
+  "Apply the color adjustments that someone set via customise (http://xahlee.org/emacs/emacs_custom_system.html) and then checked into dotfiles"
+  (interactive)
+  ;; cut-and-paste-ish from (customize-set-faces) below, made available as a function
+   (set-face-foreground 'font-lock-string-face "green")
+   (set-face-foreground 'font-lock-keyword-face "Orange")
+   (set-face-foreground 'font-lock-function-name-face "brightblue")
+   (set-face-foreground 'erb-face "red"))
+
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
