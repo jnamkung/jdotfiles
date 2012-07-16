@@ -30,7 +30,7 @@ PROJECT=`basename $PWD`
 # and give that to the -t option instead of your actual session name (perversely, tmux will happily create
 # session names containing '.' for you, then gives you no way to reference them directly).
 
-PMATCH=`echo -n "$PROJECT" | tr \. \?`
+PMATCH=`echo "$PROJECT" | tr \. \?`
 
 # tmux barfs on session names with '.' in them.  Inconvenient if your project name has a version number in it.
 #PROJECT=`echo -n "$PROJECT" | tr \. _`
@@ -43,6 +43,8 @@ if tmux has-session -t $PROJECT 2>/dev/null
 then
     tmux attach -t $PROJECT
 else
+    bundle
+
     # the trailing colon after $PMATCH is the character that separates the
     # session name from the window name.  Leaving the window name empty
     # means, for new-window, "use the next available window number".  for
