@@ -18,7 +18,10 @@ task :files do
     next if %w[Rakefile README.md LICENSE SETUP.md mac-terminals].include? file
     next if file =~ /~$/
 
-    if File.exist?(File.join(ENV['HOME'], ".#{o(file)}"))
+    if File.symlink?("#{ENV['HOME']}/.#{o(file)}")
+      system %Q{rm "#{ENV['HOME']}/.#{o(file)}"}
+      link_file(file)
+    elsif File.exist?(File.join(ENV['HOME'], ".#{o(file)}"))
       if File.identical? file, File.join(ENV['HOME'], ".#{o(file)}")
         puts "identical ~/.#{o(file)}"
       elsif replace_all
