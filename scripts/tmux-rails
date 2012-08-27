@@ -69,7 +69,13 @@ else
     # only open a guard window if the project has a Guardfile.
     if [ -f $PWD/Guardfile ]; then
 	tmux new-window  -t "$PMATCH:" -n guard
-	tmux send-keys   -t "$PMATCH:" "cd .; bundle exec guard" C-m
+	tmux send-keys   -t "$PMATCH:" "cd .; rm db/test.sqlite3; RAILS_ENV=test rake db:setup; bundle exec guard" C-m
+    fi
+
+    # open a solr window if config/sunspot.yml is present
+    if [ -f $PWD/config/sunspot.yml ]; then
+	tmux new-window  -t "$PMATCH:" -n solr
+	tmux send-keys   -t "$PMATCH:" "cd .; rake sunspot:solr:run" C-m
     fi
 
     # if you reorder the windows, make sure this guy is set to the number you want.
@@ -77,5 +83,3 @@ else
 
     tmux attach-session -t "$PMATCH"
 fi
-
-
