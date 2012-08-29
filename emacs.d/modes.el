@@ -49,6 +49,19 @@
 				) auto-mode-alist))
 
 ;; rhtml
+
+;; fix the background color for erb
+;;   this needs to happen before loading rhtml-mode
+(defface erb-face
+  `((t (:background "brightwhite" :foreground "color-88")))
+  "Default inherited face for ERB tag body"
+  :group 'rhtml-faces)
+
+(defface erb-delim-face
+  `((t (:background "brightwhite" :foreground "red")))
+  "Default inherited face for ERB tag delimeters"
+  :group 'rhtml-faces)
+
 (load-lib-dir "rhtml-mode")
 (require 'rhtml-mode)
 ;; (add-hook 'rhtml-mode-hook (lambda () (rinari-launch)))
@@ -100,7 +113,7 @@
 
 ;; scala
 (add-to-list 'load-path "~/.emacs.d/scala-mode")
-(require 'scala-mode-auto)
+(require 'scala-mode)
 (add-hook 'scala-mode-hook
 			 '(lambda ()
 				 (yas/minor-mode-on)
