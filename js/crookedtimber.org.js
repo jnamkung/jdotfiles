@@ -28,7 +28,7 @@ if ($('dl#comment_list').length > 0) {
     var $dd = $($(dt).next());
 
     $dt.find('span.comment_num a').each(function(i, num) {
-      comment_positions.push($(num).position().top);
+      comment_positions.push(Math.floor($(num).position().top));
     });
 
     var author = $dt.find('span.comment_author').text();
