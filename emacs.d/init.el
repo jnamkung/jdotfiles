@@ -54,6 +54,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(erb-face ((((class color) (min-colors 88) (background light)) (:foreground "red"))))
+ '(erb-delim-face ((((class color) (min-colors 88) (background light)) (:foreground "red"))))
  '(font-lock-function-name-face ((((class color) (min-colors 88) (background light)) (:foreground "brightblue"))))
  '(font-lock-keyword-face ((((class color) (min-colors 88) (background light)) (:foreground "Orange"))))
  '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:foreground "green")))))
