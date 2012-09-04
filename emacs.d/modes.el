@@ -53,7 +53,7 @@
 ;; fix the background color for erb
 ;;   this needs to happen before loading rhtml-mode
 (defface erb-face
-  `((t (:background "brightwhite" :foreground "color-88")))
+  `((t (:background "brightwhite" :foreground "red")))
   "Default inherited face for ERB tag body"
   :group 'rhtml-faces)
 

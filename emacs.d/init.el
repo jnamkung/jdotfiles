@@ -38,10 +38,6 @@
    (set-face-foreground 'font-lock-function-name-face "brightblue")
    (set-face-foreground 'erb-face "red"))
 
-;; load .emacs_local.el, if present
-(if (file-exists-p (setq local-init-file "~/.emacs_local.el"))
-    (load local-init-file))
-
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -58,3 +54,7 @@
  '(font-lock-function-name-face ((((class color) (min-colors 88) (background light)) (:foreground "brightblue"))))
  '(font-lock-keyword-face ((((class color) (min-colors 88) (background light)) (:foreground "Orange"))))
  '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:foreground "green")))))
+
+;; load .emacs_local.el, if present
+(if (file-exists-p (setq local-init-file "~/.emacs_local.el"))
+    (load local-init-file))
