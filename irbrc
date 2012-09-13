@@ -30,7 +30,7 @@ class Object
   def local_methods(obj = self)
     (obj.methods - obj.class.superclass.instance_methods).sort
   end
-  
+
   # print documentation
   #
   #   ri 'Array#pop'
@@ -44,6 +44,17 @@ class Object
     end
     system 'ri', method.to_s
   end
+
+  def sublime(method_name)
+    file, line = method(method_name).source_location
+    `sublime '#{file}:#{line}'`
+  end
+
+  def emacs(method_name)
+    file, line = method(method_name).source_location
+    `emacs '#{file}'`
+  end
+
 end
 
 def copy(str)
