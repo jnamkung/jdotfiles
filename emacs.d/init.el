@@ -10,6 +10,8 @@
 (setq initial-major-mode (quote text-mode))
 (setq initial-scratch-message nil)
 
+(setq-default indent-tabs-mode nil)
+
 ;;;; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
