@@ -22,9 +22,11 @@
 (global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
 (global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
 (global-set-key (kbd "M-#") 'linum-mode)
+(global-set-key (kbd "M-+") 'ido-mode)
 
 ;; ack
 (require 'ack)
+(global-set-key (kbd "C-c k") 'ack)
 
 ;; Save squiggle files somewhere out of the way
 (setq backup-directory-alist '(("." . "~/.saves")))
