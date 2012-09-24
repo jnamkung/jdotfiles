@@ -21,6 +21,7 @@
 (global-set-key (quote [27 down]) (quote scroll-up))
 (global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
 (global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
+(global-set-key (kbd "M-#") 'linum-mode)
 
 ;; ack
 (require 'ack)
