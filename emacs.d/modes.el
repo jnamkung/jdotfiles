@@ -1,5 +1,8 @@
 ;;;; Modes
 
+(require 'applescript-mode)
+(add-to-list 'auto-mode-alist '("\\.applescript$" . applescript-mode))
+
 ;; yasnippet
 (load-lib-dir "yasnippet")
 (require 'yasnippet)
