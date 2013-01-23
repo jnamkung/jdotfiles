@@ -10,7 +10,12 @@ Run:
 
 ## Features
 
+### projects directory
+
 ``p <dir>`` will cd to your Projects directory
+
+
+### tab completion(s)
 
 Tab completion is also added to rake and cap commands:
 
