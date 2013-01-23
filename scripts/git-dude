@@ -46,6 +46,7 @@ function dudenotify() {
   local DESCRIPTION="$3"
 
   if [ -n "$notify_cmd" ]; then
+    echo "git-dude calling notify command: $notify_cmd"
     eval $notify_cmd
   fi
 
