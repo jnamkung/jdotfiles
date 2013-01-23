@@ -74,8 +74,8 @@ else
 
     # open a solr window if config/sunspot.yml is present
     if [ -f $PWD/config/sunspot.yml ]; then
-	tmux new-window  -t "$PMATCH:" -n solr
-	tmux send-keys   -t "$PMATCH:" "cd .; rake sunspot:solr:run" C-m
+	tmux new-window  -t "$PMATCH:" -n foreman
+	tmux send-keys   -t "$PMATCH:" "cd .; foreman start" C-m
     fi
 
     # if you reorder the windows, make sure this guy is set to the number you want.
