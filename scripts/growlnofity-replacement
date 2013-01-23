@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
+# DicksonLabs NOTE:
 # see: http://brettterpstra.com/2012/08/02/a-drop-in-growlnotify-replacement-for-mountain-lion-notifications/
+# install in: /usr/local/bin/growlnotify and chmod a+x
 
 # == Synopsis
 #   Requires the terminal-notifier gem ([sudo] gem install terminal-notifier)
