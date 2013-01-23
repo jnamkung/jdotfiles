@@ -31,3 +31,14 @@ If there are some shell configuration settings which you want secure
 or specific to one system, place it into a ~/.localrc file. This will
 be loaded automatically if it exists.
 
+### git autocompletion
+
+First symlink the git-completion script from the dotfiles repo:
+
+    ln -s bash/completion_scripts/git_completion ~/.git-completion.bash
+
+Second, add this to your `.localrc`
+
+    if [ -f ~/.git-completion.bash ]; then
+      . ~/.git-completion.bash
+    fi
