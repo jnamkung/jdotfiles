@@ -42,3 +42,9 @@ Second, add this to your `.localrc`
     if [ -f ~/.git-completion.bash ]; then
       . ~/.git-completion.bash
     fi
+
+### growlnotify replacement
+
+If you want to use notification center instead of growlnotify (i.e. for `git dude`), you can:
+
+    sudo cp scripts/growlnotify-replacement /usr/local/bin/growlnotify; chmod a+x /usr/local/bin/growlnotify
