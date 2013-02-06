@@ -46,3 +46,6 @@ alias gpu='git push origin'
 alias ber='bundle exec rspec'
 alias be='bundle exec'
 alias vx="open ~/Projects/dotfiles/applescript/MaximizeTerminalHeight.app"
+
+# requires server_mode
+alias e='/usr/local/bin/emacsclient -n'
