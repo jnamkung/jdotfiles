@@ -9,8 +9,10 @@
 (setq inhibit-startup-message t)
 (setq initial-major-mode (quote text-mode))
 (setq initial-scratch-message nil)
-
 (setq-default indent-tabs-mode nil)
+
+;;;; Server Mode
+(server-mode)
 
 ;;;; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
