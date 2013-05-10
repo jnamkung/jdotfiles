@@ -46,35 +46,54 @@ end
 #   Rake::Task['routes'].reenable
 # end
 
-def show_routes(string = nil)
-  if Rails.version =~ /^3.2/
-    show_routes_thee_two(string)
+def show_routes(string = ".*")
+  if Rails.version =~ /^4/
+    show_routes_fur_zero string
+  elsif Rails.version =~ /^3.2/
+    show_routes_thee_two string
+  elsif Rails.version =~ /^3/
+    show_routes_legacy string
   else
-    show_routes_legacy(string)
+    puts "Not implemented for Rails #{Rails.version}"
   end
 end
 
-def show_routes_thee_two(match = nil)
-  Rails.application.reload_routes!
-  all_routes = Rails.application.routes.routes
+def show_routes_fur_zero match = ".*"
+  match = match.to_s
+  routes = raw_routes.select {|r| "#{r.name.to_s}\t#{r.verb}\t#{r.path.spec.to_s}" =~ /#{match}/}
+  require 'action_dispatch/routing/inspector'
+  inspector = ActionDispatch::Routing::RoutesInspector.new(routes)
+  routes_formatted = inspector.format(ActionDispatch::Routing::ConsoleFormatter.new, ENV['CONTROLLER'])
+    .split(/\n/)
+    .reject {|s| s =~ /^\s*$/ }
+  puts highlight(routes_formatted, match).join("\n")
+end
 
+def show_routes_thee_two match = ".*"
+  match = match.to_s
+  routes = raw_routes.select {|r| "#{r.name.to_s}\t#{r.verb}\t#{r.path.spec.to_s}" =~ /#{match}/}
   require 'rails/application/route_inspector'
   inspector = Rails::Application::RouteInspector.new
+  routes_formatted = inspector.format(routes, ENV['CONTROLLER'])
+  puts highlight(routes_formatted, match).join("\n")
+end
 
-  routes = inspector.format(all_routes, ENV['CONTROLLER'])
+def raw_routes
+  Rails.application.reload_routes!
+  Rails.application.routes.routes
+end
 
+def highlight strings = [], match = ".*"
   ansi_bold       = "\033[1m"
+  ansi_yellow     = "\033[33m"
   ansi_reset      = "\033[0m"
 
-  if (match)
-    match = match.to_s
-    puts routes.grep(/#{match}/).map { |r|
-      r.gsub!(match, "#{ansi_bold}#{match}#{ansi_reset}")
-    }.join("\n")
-
-  else
-    puts routes.join "\n"
+  unless match == ".*"
+    strings = strings.map do |r|
+      r.gsub!(match, "#{ansi_yellow}#{ansi_bold}#{match}#{ansi_reset}")
+    end
   end
+  strings
 end
 
 def show_routes_legacy(string = nil)
@@ -134,7 +153,6 @@ def show_routes_legacy(string = nil)
   end
   nil
 end
-
 
 module ActiveRecord
   class Relation
