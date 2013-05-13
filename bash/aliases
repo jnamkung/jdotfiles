@@ -5,6 +5,9 @@ function p  { cd ~/Projects/$1; }
 function db { cd ~/Dropbox/$1; }
 function j  { cd ~/Junk/$1; }
 function bcd { cd `bundle show $1`; }
+
+grep_routes () { zeus rake routes | grep "$@"; }
+
 # Misc
 alias reload='. ~/.bash_profile'
 alias fack="find . | grep -v '~' | ack -i $*"
@@ -49,3 +52,17 @@ alias vx="open ~/Projects/dotfiles/applescript/MaximizeTerminalHeight.app"
 
 # requires server_mode
 alias e='/usr/local/bin/emacsclient -n'
+
+# zeus aliases
+alias zt='zeus test'
+alias zg='zeus generate'
+alias zr='zeus rake'
+alias zrr='zeus rake routes'
+alias zgr='grep_routes'
+alias zdm='zeus rake db:migrate'
+alias zrb='zeus rake db:rollback'
+alias zrn='zeus runner'
+alias zdb='zeus dbconsole'
+alias zdd='zeus destroy'
+alias zs='zeus server'
+alias zc='zeus console'

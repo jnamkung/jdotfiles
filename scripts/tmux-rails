@@ -72,11 +72,15 @@ else
 	tmux send-keys   -t "$PMATCH:" "cd .; rm db/test.sqlite3; RAILS_ENV=test rake db:setup; bundle exec guard" C-m
     fi
 
-    # open a solr window if config/sunspot.yml is present
-    if [ -f $PWD/config/sunspot.yml ]; then
+    # open a foreman window if a Procfile is present
+    if [ -f $PWD/Procfile ]; then
 	tmux new-window  -t "$PMATCH:" -n foreman
 	tmux send-keys   -t "$PMATCH:" "cd .; foreman start" C-m
     fi
+
+    # start zeus!
+    tmux new-window -t "$PMATCH:" -n zeus
+    tmux send-keys  -t "$PMATCH:" "cd .; zeus start" C-m
 
     # if you reorder the windows, make sure this guy is set to the number you want.
     tmux select-window  -t "$PMATCH:2"
