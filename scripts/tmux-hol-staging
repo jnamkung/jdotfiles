@@ -1,0 +1,18 @@
+#!/bin/sh
+
+osascript -e "tell application \"Terminal\" to set current settings of window 1 to settings set \"Grass\""
+
+tmux start-server
+
+tmux new-session -s "staging" -d -n shell
+
+tmux new-window -t "staging:" -n khrysos
+tmux send-keys  -t "staging:" "ssh robot@khrysos.private" C-m
+
+tmux new-window -t "staging:" -n staging
+tmux send-keys  -t "staging:" "ssh robot@staging.private" C-m
+
+tmux new-window -t "staging:" -n persephone
+tmux send-keys  -t "staging:" "ssh robot@persephone.private" C-m
+
+tmux attach-session -t "staging"

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+osascript -e "tell application \"Terminal\" to set current settings of window 1 to settings set \"Red Sands\""
+
+tmux start-server
+
+tmux new-session -s "prod" -d -n shell
+
+tmux new-window -t "prod:" -n assets
+tmux send-keys  -t "prod:" "ssh robot@assets" C-m
+
+tmux new-window -t "prod:" -n athena
+tmux send-keys  -t "prod:" "ssh robot@athena" C-m
+
+tmux new-window -t "prod:" -n demeter
+tmux send-keys  -t "prod:" "ssh robot@demeter" C-m
+
+tmux attach-session -t "prod"
