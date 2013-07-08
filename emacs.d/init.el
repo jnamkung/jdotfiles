@@ -65,3 +65,8 @@
 ;; load .emacs_local.el, if present
 (if (file-exists-p (setq local-init-file "~/.emacs_local.el"))
     (load local-init-file))
+
+;; stuff from zenspider
+(require 'bs)
+(global-set-key (kbd "C-x C-b") 'bs-show) ; better buffer listings
+(global-set-key (kbd "M-s")     'fixup-whitespace) ; best function ever
