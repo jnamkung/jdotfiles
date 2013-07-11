@@ -9,7 +9,10 @@
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
 [submodule "emacs.d/scala-mode"]
 	path = emacs.d/scala-mode
-	url = https://github.com/haxney/scala-mode.git
+	url = https://github.com/haxney/scala-mode
 [submodule "emacs.d/rhtml-mode"]
 	path = emacs.d/rhtml-mode
 	url = https://github.com/eschulte/rhtml.git
+[submodule "emacs.d/emacs-rails-reloaded"]
+	path = emacs.d/emacs-rails-reloaded
+	url = https://github.com/r0man/emacs-rails-reloaded
