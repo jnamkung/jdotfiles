@@ -15,8 +15,9 @@ task :files do
   puts 'updating files ...'
   replace_all = false
   Dir['*'].each do |file|
-    next if %w[Rakefile README.md LICENSE SETUP.md mac-terminals].include? file
+    next if %w[Rakefile mac-terminals].include? file
     next if file =~ /~$/
+    next if file =~ /\.md$/
 
     if File.symlink?("#{ENV['HOME']}/.#{o(file)}")
       system %Q{rm "#{ENV['HOME']}/.#{o(file)}"}
