@@ -19,6 +19,9 @@
 (setq js-indent-level 2)
 ;(add-hook 'javascript-mode-hook '(lambda () (yas/minor-mode-on)))
 
+;; js erb files
+(add-to-list 'auto-mode-alist '("\\.js.erb$" . js-mode))
+
 ;; scss
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/folder-where-you-put-scss-mode-el"))
 (autoload 'scss-mode "scss-mode")
