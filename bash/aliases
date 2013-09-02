@@ -61,8 +61,13 @@ alias zrr='zeus rake routes'
 alias zgr='grep_routes'
 alias zdm='zeus rake db:migrate'
 alias zrb='zeus rake db:rollback'
+alias zdr='zeus rake db:rollback'
 alias zrn='zeus runner'
 alias zdb='zeus dbconsole'
 alias zdd='zeus destroy'
 alias zs='zeus server'
 alias zc='zeus console'
+
+
+# zeus generate migrations
+alias zgm='zeus-generate-migration'

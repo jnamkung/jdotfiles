@@ -70,3 +70,7 @@
 (require 'bs)
 (global-set-key (kbd "C-x C-b") 'bs-show) ; better buffer listings
 (global-set-key (kbd "M-s")     'fixup-whitespace) ; best function ever
+
+;; rcodetools -- see http://rubygems.org/gems/rcodetools
+(require 'rcodetools)
+(define-key ruby-mode-map (kbd "C-c C-z") 'xmp)
