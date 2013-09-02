@@ -74,3 +74,10 @@
 ;; rcodetools -- see http://rubygems.org/gems/rcodetools
 (require 'rcodetools)
 (define-key ruby-mode-map (kbd "C-c C-z") 'xmp)
+
+;; helm -- see https://github.com/emacs-helm/helm
+
+(add-to-list 'load-path "~/.emacs.d/helm/")
+(require 'helm-config)
+(global-set-key (kbd "C-c h") 'helm-mini)
+;; (helm-mode 1) -- NOTE: enable this for helm-mode in 'M-x', 'C-x C-f', etc.
