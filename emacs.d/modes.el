@@ -22,6 +22,9 @@
 ;; js erb files
 (add-to-list 'auto-mode-alist '("\\.js.erb$" . js-mode))
 
+;; mysql cnf files
+(add-to-list 'auto-mode-alist '("\\.cnf$" . conf-mode))
+
 ;; scss
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/folder-where-you-put-scss-mode-el"))
 (autoload 'scss-mode "scss-mode")
