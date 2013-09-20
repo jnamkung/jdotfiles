@@ -61,6 +61,9 @@
 
 ;; fix the background color for erb
 ;;   this needs to happen before loading rhtml-mode
+
+(add-to-list 'auto-mode-alist '("\\.ejs$" . rhtml-mode))
+
 (defface erb-face
   `((t (:background "brightwhite" :foreground "red")))
   "Default inherited face for ERB tag body"
