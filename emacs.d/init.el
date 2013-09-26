@@ -17,7 +17,8 @@
                       markdown-mode
                       nrepl
                       scss-mode
-                      slim-mode))
+                      slim-mode
+                      yaml-mode))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))

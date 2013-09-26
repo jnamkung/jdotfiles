@@ -19,11 +19,6 @@
 ;; markdown mode for *.md files.
 (add-to-list 'auto-mode-alist '("\.md$" . markdown-mode))
 
-;; feature
-;; (load-lib-dir "feature-mode")
-;; (require 'feature-mode)
-;; (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
-
 ;; css
 (autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
@@ -59,10 +54,6 @@
 (load-lib-dir "rhtml-mode")
 (require 'rhtml-mode)
 ;; (add-hook 'rhtml-mode-hook (lambda () (rinari-launch)))
-
-;; yaml
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 ;; coffee
 (add-to-list 'load-path "~/.emacs.d/coffee-mode")
