@@ -3,6 +3,12 @@
 (defun load-lib-dir (path) (add-to-list 'load-path (concat root-dir path)))
 (load-lib-dir ".")
 
+;;;; from: http://clojure-doc.org/articles/tutorials/emacs.html
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
 ;;;; Setup
 (menu-bar-mode 0)
 (setq inhibit-startup-echo-area-message t)

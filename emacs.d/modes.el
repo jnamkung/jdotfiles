@@ -127,3 +127,8 @@
 (add-to-list 'load-path "~/.emacs.d/scala-mode")
 (require 'scala-mode)
 (add-hook 'scala-mode-hook '(lambda () (yas/minor-mode-on)))
+
+;; erlang
+(add-to-list 'load-path "~/.emacs.d/erlang-mode")
+(require 'erlang-start)
+;; (require 'erlang-flymake) --> not sure this works well.
