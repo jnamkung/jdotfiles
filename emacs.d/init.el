@@ -9,6 +9,16 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
+
+;;;; newfangled way of installing packages.
+(defvar my-packages '(clojure-mode
+                      clojure-test-mode
+                      nrepl))
+
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
+
 ;;;; Setup
 (menu-bar-mode 0)
 (setq inhibit-startup-echo-area-message t)

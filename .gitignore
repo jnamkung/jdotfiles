@@ -9,3 +9,4 @@
 .DS_Store
 
 emacs.d/abbrev_defs
+emacs.d/elpa/
