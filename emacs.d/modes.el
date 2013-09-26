@@ -99,10 +99,6 @@
 (autoload 'io-mode "io-mode" "Mode for editing Io files" t)
 (add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
 
-;; haml
-(require 'haml-mode)
-(setq haml-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
-
 ;; color-themes
 (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/color-theme.el")
 (require 'color-theme)

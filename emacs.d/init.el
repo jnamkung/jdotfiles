@@ -13,6 +13,7 @@
 (defvar my-packages '(applescript-mode
                       clojure-mode
                       clojure-test-mode
+                      haml-mode
                       nrepl
                       scss-mode))
 
