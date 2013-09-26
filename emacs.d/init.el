@@ -11,7 +11,8 @@
 
 
 ;;;; newfangled way of installing packages.
-(defvar my-packages '(clojure-mode
+(defvar my-packages '(applescript-mode
+                      clojure-mode
                       clojure-test-mode
                       nrepl))
 
