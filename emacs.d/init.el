@@ -14,6 +14,7 @@
                       clojure-mode
                       clojure-test-mode
                       haml-mode
+                      markdown-mode
                       nrepl
                       scss-mode))
 

@@ -16,8 +16,7 @@
 ;; mysql cnf files
 (add-to-list 'auto-mode-alist '("\\.cnf$" . conf-mode))
 
-;; markdown
-(require 'markdown-mode)
+;; markdown mode for *.md files.
 (add-to-list 'auto-mode-alist '("\.md$" . markdown-mode))
 
 ;; slim
