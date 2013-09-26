@@ -27,7 +27,7 @@ migration_name = ARGV.first
 
 # 1) runs: `zeus generate migration <name>`
 
-results = `zeus generate migration #{migration_name}`
+results = `zeus generate migration #{ARGV.join(' ')}`
 puts results
 
 # 2) parses filename of migration
