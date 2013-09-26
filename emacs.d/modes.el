@@ -7,25 +7,14 @@
 (yas/load-directory yas/root-directory)
 (yas/initialize)
 
-;; zencoding for html
-;; (load-lib-dir "zencoding-mode")
-;; (require 'zencoding-mode)
-;; (add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
-
 ;; javascript indention
 (setq js-indent-level 2)
-;(add-hook 'javascript-mode-hook '(lambda () (yas/minor-mode-on)))
 
 ;; js erb files
 (add-to-list 'auto-mode-alist '("\\.js.erb$" . js-mode))
 
 ;; mysql cnf files
 (add-to-list 'auto-mode-alist '("\\.cnf$" . conf-mode))
-
-;; scss
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/folder-where-you-put-scss-mode-el"))
-(autoload 'scss-mode "scss-mode")
-(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
 ;; markdown
 (require 'markdown-mode)

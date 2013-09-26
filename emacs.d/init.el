@@ -9,12 +9,12 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-
 ;;;; newfangled way of installing packages.
 (defvar my-packages '(applescript-mode
                       clojure-mode
                       clojure-test-mode
-                      nrepl))
+                      nrepl
+                      scss-mode))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
