@@ -82,6 +82,15 @@ else
     tmux new-window -t "$PMATCH:" -n zeus
     tmux send-keys  -t "$PMATCH:" "cd .; zeus start" C-m
 
+    # earthquake is a twitter client
+    tmux new-window -t "$PMATCH:" -n earthquake
+    tmux send-keys  -t "$PMATCH:" "earthquake" C-m
+
+    # pianobar is essential!
+    tmux new-window -t "$PMATCH:" -n pianobar
+    tmux send-keys  -t "$PMATCH:" "pianobar" C-m
+
+
     # if you reorder the windows, make sure this guy is set to the number you want.
     tmux select-window  -t "$PMATCH:2"
 
