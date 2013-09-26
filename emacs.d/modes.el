@@ -19,9 +19,6 @@
 ;; markdown mode for *.md files.
 (add-to-list 'auto-mode-alist '("\.md$" . markdown-mode))
 
-;; slim
-(require 'slim-mode)
-
 ;; feature
 ;; (load-lib-dir "feature-mode")
 ;; (require 'feature-mode)
