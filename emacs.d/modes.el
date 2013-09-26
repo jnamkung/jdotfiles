@@ -82,7 +82,7 @@
   (c-set-offset 'arglist-intro '+)
   )
 
-;; io
+;; io -- Note: as of 9/2013 there was no io-mode on marmalade.
 (autoload 'io-mode "io-mode" "Mode for editing Io files" t)
 (add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
 
@@ -97,7 +97,7 @@
 (require 'scala-mode)
 (add-hook 'scala-mode-hook '(lambda () (yas/minor-mode-on)))
 
-;; erlang
+;; erlang -- Note: we use the one that comes with brew, its more up-to-date then
+;;        -- then the one that is (currently?) on marmalade.
 (add-to-list 'load-path "~/.emacs.d/erlang-mode")
 (require 'erlang-start)
-;; (require 'erlang-flymake) --> not sure this works well.
