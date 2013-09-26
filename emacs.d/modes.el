@@ -19,10 +19,9 @@
 ;; markdown mode for *.md files.
 (add-to-list 'auto-mode-alist '("\.md$" . markdown-mode))
 
-;; css
-(autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
-(add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
-(autoload 'rainbow-mode "rainbow-mode")
+;; rainbow mode -- for css
+;; (autoload 'rainbow-mode "rainbow-mode")
+(setq rainbow-html-colors 'auto)
 
 ;; ruby
 (autoload 'ruby-mode "ruby-mode" "Major mode for ruby files" t)
