@@ -91,11 +91,6 @@
 (add-to-list 'load-path "~/.emacs.d/emacs-color-theme-solarized/")
 (require 'color-theme-solarized)
 
-;; scala
-(add-to-list 'load-path "~/.emacs.d/scala-mode")
-(require 'scala-mode)
-(add-hook 'scala-mode-hook '(lambda () (yas/minor-mode-on)))
-
 ;; erlang -- Note: we use the one that comes with brew, its more up-to-date then
 ;;        -- then the one that is (currently?) on marmalade.
 (add-to-list 'load-path "~/.emacs.d/erlang-mode")
