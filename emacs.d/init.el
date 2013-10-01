@@ -10,7 +10,8 @@
 (package-initialize)
 
 ;;;; newfangled way of installing packages.
-(defvar my-packages '(applescript-mode
+(defvar my-packages '(ack
+                      applescript-mode
                       clojure-mode
                       clojure-test-mode
                       css-mode
@@ -51,7 +52,6 @@
 (global-set-key (kbd "M-+") 'ido-mode)
 
 ;; ack
-(require 'ack)
 (global-set-key (kbd "C-c k") 'ack)
 
 ;; Save squiggle files somewhere out of the way
