@@ -18,7 +18,7 @@
                       markdown-mode
                       nrepl
                       rainbow-mode
-                      scala-mode2
+                      scala-mode
                       scss-mode
                       slim-mode
                       yaml-mode))
