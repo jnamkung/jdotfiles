@@ -4,6 +4,7 @@
 --type-add=css=.sass,.less,.scss
 --type-set=markdown=.markdown,.md
 --type-set=cucumber=.feature
+--ignore-dir=cjbs
 --ignore-dir=vendor
 --ignore-dir=log
 --ignore-dir=tmp
