@@ -67,6 +67,7 @@
 	  '(lambda() (coffee-custom)))
 
 ;; php
+(add-to-list 'load-path "~/.emacs.d/php-mode")
 (require 'php-mode)
 (add-hook 'php-mode-hook
 	  '(lambda () (define-abbrev php-mode-abbrev-table "ex" "extends")))
@@ -82,11 +83,12 @@
   )
 
 ;; io -- Note: as of 9/2013 there was no io-mode on marmalade.
+(add-to-list 'load-path "~/.emacs.d/io-mode")
 (autoload 'io-mode "io-mode" "Mode for editing Io files" t)
 (add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
 
-;; color-themes
-(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/color-theme.el")
+;; color-themes -- note these newer than what is on marmalade.
+(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
 (require 'color-theme)
 (add-to-list 'load-path "~/.emacs.d/emacs-color-theme-solarized/")
 (require 'color-theme-solarized)

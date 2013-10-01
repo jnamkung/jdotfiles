@@ -2,6 +2,7 @@
 (defun load-lib (name) (load (concat root-dir name ".el")))
 (defun load-lib-dir (path) (add-to-list 'load-path (concat root-dir path)))
 (load-lib-dir ".")
+(load-lib-dir "./lib")
 
 ;;;; from: http://clojure-doc.org/articles/tutorials/emacs.html
 (require 'package)
