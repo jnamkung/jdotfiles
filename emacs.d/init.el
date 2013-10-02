@@ -8,6 +8,8 @@
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/"))
 (package-initialize)
 
 ;;;; newfangled way of installing packages.
@@ -20,7 +22,7 @@
                       markdown-mode
                       nrepl
                       rainbow-mode
-                      scala-mode
+                      scala-mode2
                       scss-mode
                       slim-mode
                       yaml-mode))
