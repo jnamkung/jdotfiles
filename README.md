@@ -10,7 +10,12 @@ Run:
 
 ## Features
 
+### projects directory
+
 ``p <dir>`` will cd to your Projects directory
+
+
+### tab completion(s)
 
 Tab completion is also added to rake and cap commands:
 
@@ -31,3 +36,20 @@ If there are some shell configuration settings which you want secure
 or specific to one system, place it into a ~/.localrc file. This will
 be loaded automatically if it exists.
 
+### git autocompletion
+
+First symlink the git-completion script from the dotfiles repo:
+
+    ln -s bash/completion_scripts/git_completion ~/.git-completion.bash
+
+Second, add this to your `.localrc`
+
+    if [ -f ~/.git-completion.bash ]; then
+      . ~/.git-completion.bash
+    fi
+
+### growlnotify replacement
+
+If you want to use notification center instead of growlnotify (i.e. for `git dude`), you can:
+
+    sudo cp scripts/growlnotify-replacement /usr/local/bin/growlnotify; chmod a+x /usr/local/bin/growlnotify

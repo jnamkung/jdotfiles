@@ -2,6 +2,34 @@
 (defun load-lib (name) (load (concat root-dir name ".el")))
 (defun load-lib-dir (path) (add-to-list 'load-path (concat root-dir path)))
 (load-lib-dir ".")
+(load-lib-dir "./lib")
+
+;;;; from: http://clojure-doc.org/articles/tutorials/emacs.html
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/"))
+(package-initialize)
+
+;;;; newfangled way of installing packages.
+(defvar my-packages '(ack
+                      applescript-mode
+                      clojure-mode
+                      clojure-test-mode
+                      css-mode
+                      haml-mode
+                      markdown-mode
+                      nrepl
+                      rainbow-mode
+                      scala-mode2
+                      scss-mode
+                      slim-mode
+                      yaml-mode))
+
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
 
 ;;;; Setup
 (menu-bar-mode 0)
@@ -9,6 +37,10 @@
 (setq inhibit-startup-message t)
 (setq initial-major-mode (quote text-mode))
 (setq initial-scratch-message nil)
+(setq-default indent-tabs-mode nil)
+
+;;;; Server Mode
+(server-mode)
 
 ;;;; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -19,9 +51,11 @@
 (global-set-key (quote [27 down]) (quote scroll-up))
 (global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
 (global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
+(global-set-key (kbd "M-#") 'linum-mode)
+(global-set-key (kbd "M-+") 'ido-mode)
 
 ;; ack
-(require 'ack)
+(global-set-key (kbd "C-c k") 'ack)
 
 ;; Save squiggle files somewhere out of the way
 (setq backup-directory-alist '(("." . "~/.saves")))
@@ -58,3 +92,19 @@
 ;; load .emacs_local.el, if present
 (if (file-exists-p (setq local-init-file "~/.emacs_local.el"))
     (load local-init-file))
+
+;; stuff from zenspider
+(require 'bs)
+(global-set-key (kbd "C-x C-b") 'bs-show) ; better buffer listings
+(global-set-key (kbd "M-s")     'fixup-whitespace) ; best function ever
+
+;; rcodetools -- see http://rubygems.org/gems/rcodetools
+(require 'rcodetools)
+(define-key ruby-mode-map (kbd "C-c C-z") 'xmp)
+
+;; helm -- see https://github.com/emacs-helm/helm
+
+(add-to-list 'load-path "~/.emacs.d/helm/")
+(require 'helm-config)
+(global-set-key (kbd "C-c h") 'helm-mini)
+;; (helm-mode 1) -- NOTE: enable this for helm-mode in 'M-x', 'C-x C-f', etc.

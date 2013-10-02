@@ -6,12 +6,13 @@
 --type-set=cucumber=.feature
 --ignore-dir=cjbs
 --ignore-dir=vendor
+--ignore-dir=public
 --ignore-dir=log
 --ignore-dir=tmp
 --ignore-dir=doc
 --ignore-dir=coverage
+--ignore-dir=fixtures
 --sort-files
 --color
 --follow
 --group
-

@@ -1,0 +1,39 @@
+#!/usr/bin/ruby
+
+def prompt(file_path)
+  puts '(e)dit, (r)un, (c)at, (d)elete, (i)gnore?'
+  action = STDIN.getc.chr
+  perform_action(action, file_path)
+end
+
+def perform_action(action, file_path)
+  case action
+  when 'e'
+    `/usr/local/bin/emacsclient -n #{file_path}`
+    puts "Opened in editor"
+  when 'r'
+    puts "Running!"
+    results = `zdm`
+  when 'c'
+    results = `cat #{file_path}`
+    puts results
+  when 'd'
+    puts "removing generated migration"
+    r = `rm #{file_path}`
+  end
+end
+
+migration_name = ARGV.first
+
+# 1) runs: `zeus generate migration <name>`
+
+results = `zeus generate migration #{ARGV.join(' ')}`
+puts results
+
+# 2) parses filename of migration
+results =~ /([A-Za-z0-9\_]+\.rb)/
+filename = $1
+file_path = "db/migrate/#{$1}"
+
+# 3) prompts: '(e)dit, (r)un, (c)at, (i)gnore?'
+prompt(file_path)

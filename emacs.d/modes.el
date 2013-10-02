@@ -7,36 +7,21 @@
 (yas/load-directory yas/root-directory)
 (yas/initialize)
 
-;; zencoding for html
-;; (load-lib-dir "zencoding-mode")
-;; (require 'zencoding-mode)
-;; (add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
-
 ;; javascript indention
 (setq js-indent-level 2)
-;(add-hook 'javascript-mode-hook '(lambda () (yas/minor-mode-on)))
 
-;; scss
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/folder-where-you-put-scss-mode-el"))
-(autoload 'scss-mode "scss-mode")
-(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+;; js erb files
+(add-to-list 'auto-mode-alist '("\\.js.erb$" . js-mode))
 
-;; markdown
-(require 'markdown-mode)
+;; mysql cnf files
+(add-to-list 'auto-mode-alist '("\\.cnf$" . conf-mode))
+
+;; markdown mode for *.md files.
 (add-to-list 'auto-mode-alist '("\.md$" . markdown-mode))
 
-;; slim
-(require 'slim-mode)
-
-;; feature
-;; (load-lib-dir "feature-mode")
-;; (require 'feature-mode)
-;; (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
-
-;; css
-(autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
-(add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
-(autoload 'rainbow-mode "rainbow-mode")
+;; rainbow mode -- for css
+;; (autoload 'rainbow-mode "rainbow-mode")
+(setq rainbow-html-colors 'auto)
 
 ;; ruby
 (autoload 'ruby-mode "ruby-mode" "Major mode for ruby files" t)
@@ -52,6 +37,9 @@
 
 ;; fix the background color for erb
 ;;   this needs to happen before loading rhtml-mode
+
+(add-to-list 'auto-mode-alist '("\\.ejs$" . rhtml-mode))
+
 (defface erb-face
   `((t (:background "brightwhite" :foreground "red")))
   "Default inherited face for ERB tag body"
@@ -66,10 +54,6 @@
 (require 'rhtml-mode)
 ;; (add-hook 'rhtml-mode-hook (lambda () (rinari-launch)))
 
-;; yaml
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-
 ;; coffee
 (add-to-list 'load-path "~/.emacs.d/coffee-mode")
 (require 'coffee-mode)
@@ -83,6 +67,7 @@
 	  '(lambda() (coffee-custom)))
 
 ;; php
+(add-to-list 'load-path "~/.emacs.d/php-mode")
 (require 'php-mode)
 (add-hook 'php-mode-hook
 	  '(lambda () (define-abbrev php-mode-abbrev-table "ex" "extends")))
@@ -97,24 +82,18 @@
   (c-set-offset 'arglist-intro '+)
   )
 
-;; io
+;; io -- Note: as of 9/2013 there was no io-mode on marmalade.
+(add-to-list 'load-path "~/.emacs.d/io-mode")
 (autoload 'io-mode "io-mode" "Mode for editing Io files" t)
 (add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
 
-;; haml
-(require 'haml-mode)
-(setq haml-mode-hook (function (lambda () (setq indent-tabs-mode nil))))
-
-;; color-themes
-(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/color-theme.el")
+;; color-themes -- note these newer than what is on marmalade.
+(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
 (require 'color-theme)
 (add-to-list 'load-path "~/.emacs.d/emacs-color-theme-solarized/")
 (require 'color-theme-solarized)
 
-;; scala
-;; (add-to-list 'load-path "~/.emacs.d/scala-mode")
-;; (require 'scala-mode)
-;; (add-hook 'scala-mode-hook
-;; 			 '(lambda ()
-;; 				 (yas/minor-mode-on)
-;; 				 ))
+;; erlang -- Note: we use the one that comes with brew, its more up-to-date then
+;;        -- then the one that is (currently?) on marmalade.
+(add-to-list 'load-path "~/.emacs.d/erlang-mode")
+(require 'erlang-start)
