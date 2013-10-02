@@ -5,7 +5,7 @@
 // Type the number of the comment and the browser will scroll to it
 
 var highlighted = ['JW Mason', 'Cosma Shalizi', 'robotslave', 'Bruce Wilder', 'Lemuel Pitkin', 'lemuel pitkin',
-		   'tomslee', 'Kieran Healy', 'dsquared', 'Daniel', 'Colin Danby', 'John Emerson'];
+		   'tomslee', 'Kieran Healy', 'dsquared', 'Daniel', 'Colin Danby', 'John Emerson', 'root_e', 'rootless', 'rootless (@root_e)'];
 
 var hidden = ['Steve Sailer', 'Tim Worstall', 'kidneystones'];
 
@@ -20,7 +20,7 @@ if ($('dl#comment_list').length > 0) {
 		   '.hidden { background-color: #131313; } ' +
 		   '</style>');
 
-  var comment_positions = [];
+  var comments = [];
   var highlighted_comments;
 
   $('#comment_list').find('dt').each(function(i, dt) {
@@ -28,7 +28,7 @@ if ($('dl#comment_list').length > 0) {
     var $dd = $($(dt).next());
 
     $dt.find('span.comment_num a').each(function(i, num) {
-      comment_positions.push(Math.floor($(num).position().top));
+      comments.push({ href: num.href, position: Math.floor($(num).position().top) });
     });
 
     var author = $dt.find('span.comment_author').text();
@@ -81,31 +81,26 @@ if ($('dl#comment_list').length > 0) {
 	clearTimeout(number_timer);
 	number_timer = setTimeout(function() {
 	  var number = parseInt(keypresses) - 1;
-	  if (number < comment_positions.length) {
-	    $(window).scrollTop(comment_positions[number] - fudge);
-	  }
+	  if (number < comments.length)  window.location.replace(comments[number].href);
 	  keypresses = '';
 	}, 500);
       } else {
 	clearTimeout(number_timer);
 	keypresses = '';
+	var current = $(window).scrollTop();
 
 	if (key == 'n' || key == 'j') {
-	  var current = $(window).scrollTop();
-	  for (var i in comment_positions) {
-	    var position = comment_positions[i];
-	    if (current < position - fudge) {
-	      $(window).scrollTop(position - fudge);
+	  for (var i in comments) {
+	    if (current < comments[i].position - fudge) {
+	      window.location.replace(comments[i].href);
 	      break;
 	    }
 	  }
 	} else if (key == 'p' || key == 'k') {
-	  var current = $(window).scrollTop();
-	  var i = comment_positions.length;
+	  var i = comments.length;
 	  while (i--) {
-	    var position = comment_positions[i];
-	    if (current > position - fudge) {
-	      $(window).scrollTop(position - fudge);
+	    if (current > comments[i].position - fudge) {
+	      window.location.replace(comments[i].href);
 	      break;
 	    }
 	  }
