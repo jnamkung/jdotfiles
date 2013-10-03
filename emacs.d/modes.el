@@ -50,13 +50,7 @@
   "Default inherited face for ERB tag delimeters"
   :group 'rhtml-faces)
 
-(load-lib-dir "rhtml-mode")
-(require 'rhtml-mode)
-;; (add-hook 'rhtml-mode-hook (lambda () (rinari-launch)))
-
 ;; coffee
-(add-to-list 'load-path "~/.emacs.d/coffee-mode")
-(require 'coffee-mode)
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 (defun coffee-custom ()
@@ -86,12 +80,6 @@
 (add-to-list 'load-path "~/.emacs.d/io-mode")
 (autoload 'io-mode "io-mode" "Mode for editing Io files" t)
 (add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
-
-;; color-themes -- note these newer than what is on marmalade.
-(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
-(require 'color-theme)
-(add-to-list 'load-path "~/.emacs.d/emacs-color-theme-solarized/")
-(require 'color-theme-solarized)
 
 ;; erlang -- Note: we use the one that comes with brew, its more up-to-date then
 ;;        -- then the one that is (currently?) on marmalade.

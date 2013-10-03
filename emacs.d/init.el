@@ -17,11 +17,14 @@
                       applescript-mode
                       clojure-mode
                       clojure-test-mode
+                      coffee-mode
+                      color-theme-solarized
                       css-mode
                       haml-mode
                       markdown-mode
                       nrepl
                       rainbow-mode
+                      rhtml-mode
                       scala-mode2
                       scss-mode
                       slim-mode
