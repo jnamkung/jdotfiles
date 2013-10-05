@@ -61,8 +61,6 @@
 	  '(lambda() (coffee-custom)))
 
 ;; php
-(add-to-list 'load-path "~/.emacs.d/php-mode")
-(require 'php-mode)
 (add-hook 'php-mode-hook
 	  '(lambda () (define-abbrev php-mode-abbrev-table "ex" "extends")))
 (defun my-php-mode-common-hook ()
