@@ -23,6 +23,11 @@
 ;; (autoload 'rainbow-mode "rainbow-mode")
 (setq rainbow-html-colors 'auto)
 
+;; sass - don't compile on save
+(add-hook 'scss-mode-hook
+          '(lambda ()
+             (setq scss-compile-at-save nil) ) )
+
 ;; ruby
 (autoload 'ruby-mode "ruby-mode" "Major mode for ruby files" t)
 (setq auto-mode-alist (append '(("\\.rb$"   . ruby-mode)

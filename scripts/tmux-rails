@@ -56,7 +56,7 @@ else
     tmux send-keys   -t "$PMATCH:" "rails s -p $PORT" C-m
 
     tmux new-window  -t "$PMATCH:" -n emacs
-    tmux send-keys   -t "$PMATCH:" "TERM=xterm-256color emacs" C-m
+    tmux send-keys   -t "$PMATCH:" "emacs" C-m
 
     tmux new-window  -t "$PMATCH:" -n shell
 
@@ -83,13 +83,16 @@ else
     tmux send-keys  -t "$PMATCH:" "cd .; zeus start" C-m
 
     # earthquake is a twitter client
-    tmux new-window -t "$PMATCH:" -n earthquake
-    tmux send-keys  -t "$PMATCH:" "earthquake" C-m
+    if [ command -v earthquake ]; then
+        tmux new-window -t "$PMATCH:" -n earthquake
+        tmux send-keys  -t "$PMATCH:" "earthquake" C-m
+    fi
 
     # pianobar is essential!
-    tmux new-window -t "$PMATCH:" -n pianobar
-    tmux send-keys  -t "$PMATCH:" "pianobar" C-m
-
+    if [ command -v pianobar ]; then
+        tmux new-window -t "$PMATCH:" -n pianobar
+        tmux send-keys  -t "$PMATCH:" "pianobar" C-m
+    fi
 
     # if you reorder the windows, make sure this guy is set to the number you want.
     tmux select-window  -t "$PMATCH:2"
