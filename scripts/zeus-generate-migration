@@ -13,7 +13,7 @@ def perform_action(action, file_path)
     puts "Opened in editor"
   when 'r'
     puts "Running!"
-    results = `zdm`
+    results = `zeus rake db:migrate`
   when 'c'
     results = `cat #{file_path}`
     puts results

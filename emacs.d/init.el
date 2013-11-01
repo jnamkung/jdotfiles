@@ -17,11 +17,15 @@
                       applescript-mode
                       clojure-mode
                       clojure-test-mode
+                      coffee-mode
+                      color-theme-solarized
                       css-mode
                       haml-mode
                       markdown-mode
                       nrepl
+                      php-mode
                       rainbow-mode
+                      rhtml-mode
                       scala-mode2
                       scss-mode
                       slim-mode
@@ -77,28 +81,24 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- )
+  )
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(erb-face ((((class color) (min-colors 88) (background light)) (:foreground "red"))))
- '(erb-delim-face ((((class color) (min-colors 88) (background light)) (:foreground "red"))))
- '(font-lock-function-name-face ((((class color) (min-colors 88) (background light)) (:foreground "brightblue"))))
- '(font-lock-keyword-face ((((class color) (min-colors 88) (background light)) (:foreground "Orange"))))
- '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:foreground "green")))))
-
-;; load .emacs_local.el, if present
-(if (file-exists-p (setq local-init-file "~/.emacs_local.el"))
-    (load local-init-file))
+  '(erb-delim-face ((((class color) (min-colors 88)) (:foreground "red"))))
+  '(erb-face ((((class color) (min-colors 88)) (:foreground "red"))))
+  '(font-lock-function-name-face ((((class color) (min-colors 88)) (:foreground "brightblue"))))
+  '(font-lock-keyword-face ((((class color) (min-colors 88)) (:foreground "Orange"))))
+  '(font-lock-string-face ((((class color) (min-colors 88)) (:foreground "green")))))
 
 ;; stuff from zenspider
 (require 'bs)
 (global-set-key (kbd "C-x C-b") 'bs-show) ; better buffer listings
 (global-set-key (kbd "M-s")     'fixup-whitespace) ; best function ever
 
-;; rcodetools -- see http://rubygems.org/gems/rcodetools
+(require 'ruby-mode)
 (require 'rcodetools)
 (define-key ruby-mode-map (kbd "C-c C-z") 'xmp)
 
@@ -108,3 +108,15 @@
 (require 'helm-config)
 (global-set-key (kbd "C-c h") 'helm-mini)
 ;; (helm-mode 1) -- NOTE: enable this for helm-mode in 'M-x', 'C-x C-f', etc.
+
+
+
+
+
+;; DO THIS LAST
+
+;; load .emacs_local.el, if present
+(if (file-exists-p (setq local-init-file "~/.emacs_local.el"))
+    (load local-init-file))
+
+;; DO NOT ADD ANYTHING BELOW THIS

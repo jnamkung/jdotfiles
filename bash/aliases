@@ -68,6 +68,8 @@ alias zdd='zeus destroy'
 alias zs='zeus server'
 alias zc='zeus console'
 
-
 # zeus generate migrations
 alias zgm='zeus-generate-migration'
+
+# open the last migration in emacs
+alias elm='e `find db/migrate | sort | tail -n 1 `'
