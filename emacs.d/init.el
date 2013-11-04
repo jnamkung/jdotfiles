@@ -4,28 +4,37 @@
 (load-lib-dir ".")
 (load-lib-dir "./lib")
 
-;;;; from: http://clojure-doc.org/articles/tutorials/emacs.html
+
+;;;; package management
 (require 'package)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/"))
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
-;;;; newfangled way of installing packages.
-(defvar my-packages '(ack
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+;; simple way to synchronize a bunch of packages across installs.
+;;   (there are more sophisticated ways to do this, like pallet
+;;    or el-get, but this seems to work fine for now)
+(defvar my-packages '(ag
                       applescript-mode
+                      auto-complete
                       clojure-mode
                       clojure-test-mode
                       coffee-mode
-                      color-theme-solarized
                       css-mode
+                      expand-region
                       haml-mode
+                      highlight-indentation
                       markdown-mode
                       nrepl
                       php-mode
                       rainbow-mode
-                      rhtml-mode
+                      robe
+                      smartparens
                       scala-mode2
                       scss-mode
                       slim-mode
@@ -66,32 +75,18 @@
 
 (load-lib "modes")
 
-;; make color tweaks available via interactive function
-(defun dotfiles-facefixes ()
-  "Apply the color adjustments that someone set via customise (http://xahlee.org/emacs/emacs_custom_system.html) and then checked into dotfiles"
-  (interactive)
-  ;; cut-and-paste-ish from (customize-set-faces) below, made available as a function
-   (set-face-foreground 'font-lock-string-face "green")
-   (set-face-foreground 'font-lock-keyword-face "Orange")
-   (set-face-foreground 'font-lock-function-name-face "brightblue")
-   (set-face-foreground 'erb-face "red"))
-
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-  )
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-  '(erb-delim-face ((((class color) (min-colors 88)) (:foreground "red"))))
-  '(erb-face ((((class color) (min-colors 88)) (:foreground "red"))))
-  '(font-lock-function-name-face ((((class color) (min-colors 88)) (:foreground "brightblue"))))
-  '(font-lock-keyword-face ((((class color) (min-colors 88)) (:foreground "Orange"))))
-  '(font-lock-string-face ((((class color) (min-colors 88)) (:foreground "green")))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 ;; stuff from zenspider
 (require 'bs)
@@ -101,14 +96,6 @@
 (require 'ruby-mode)
 (require 'rcodetools)
 (define-key ruby-mode-map (kbd "C-c C-z") 'xmp)
-
-;; helm -- see https://github.com/emacs-helm/helm
-
-(add-to-list 'load-path "~/.emacs.d/helm/")
-(require 'helm-config)
-(global-set-key (kbd "C-c h") 'helm-mini)
-;; (helm-mode 1) -- NOTE: enable this for helm-mode in 'M-x', 'C-x C-f', etc.
-
 
 
 

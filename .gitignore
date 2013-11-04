@@ -8,6 +8,7 @@
 # for Mac users
 .DS_Store
 
+emacs.d/ac-comphist.dat
 emacs.d/abbrev_defs
 emacs.d/elpa/
 emacs.d/url/
