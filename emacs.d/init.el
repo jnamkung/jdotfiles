@@ -38,7 +38,9 @@
                       scala-mode2
                       scss-mode
                       slim-mode
-                      yaml-mode))
+                      web-mode
+                      yaml-mode
+                      yasnippet))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))

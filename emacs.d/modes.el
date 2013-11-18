@@ -88,9 +88,13 @@
           '(lambda ()
              (setq scss-compile-at-save nil) ) )
 
+;; web-mode
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
 ;; yasnippet
-(load-lib-dir "yasnippet")
-(require 'yasnippet)
-(setq yas/root-directory (concat root-dir "yasnippet/snippets"))
-(yas/load-directory yas/root-directory)
-(yas/initialize)
+;; (load-lib-dir "yasnippet")
+;; (require 'yasnippet)
+;; (setq yas/root-directory (concat root-dir "yasnippet/snippets"))
+;; (yas/load-directory yas/root-directory)
+;; (yas/initialize)

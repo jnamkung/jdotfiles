@@ -1,6 +1,0 @@
-#name : <row...>...</row>
-#group : custom
-# --
-<div id="row">
-  $0
-</div>

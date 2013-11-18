@@ -1,6 +1,0 @@
-#name : <div id='column'></div>
-#group : custom
-# --
-<div class="column grid_${}">
-  $0
-</div>
