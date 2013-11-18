@@ -3,7 +3,9 @@
 
 begin
   require 'hirb'
-  Hirb.enable
+  puts "railsrc enabling hirb"
+
+  Hirb.enable pager: !(ENV['PAGER'] && "cat" == ENV['PAGER'].split(File::SEPARATOR).last)
 
   def hirbv
     Hirb.disable
