@@ -1,5 +1,8 @@
 ;;;; Modes
 
+;; ag (ag > ack)
+(global-set-key (kbd "C-c k") 'ag)
+
 ;; autocomplete
 (require 'auto-complete-config)
 (ac-config-default)
@@ -24,10 +27,9 @@
 
 ;; expand-region
 (require 'expand-region)
-(global-set-key (kbd "C-c e") 'er/expand-region)
+(global-set-key (kbd "C-c o") 'er/expand-region)
 
 ;; highlight-indentation
-;;   not sold on this one...
 (require 'highlight-indentation)
 (add-hook 'ruby-mode-hook
          (lambda () (highlight-indentation-current-column-mode)))
@@ -92,9 +94,19 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
-;; yasnippet
-;; (load-lib-dir "yasnippet")
-;; (require 'yasnippet)
-;; (setq yas/root-directory (concat root-dir "yasnippet/snippets"))
-;; (yas/load-directory yas/root-directory)
-;; (yas/initialize)
+
+;; Yasnippet
+(require 'yasnippet)
+;; use the nice dropdown-list widget, instead of selecting snippets in the minibuffer
+(require 'dropdown-list)
+(setq yas-prompt-functions '(yas-dropdown-prompt
+                             yas-ido-prompt
+                             yas-completing-prompt))
+;; pick up custom snippets in dicksonlabs/snippets
+(add-to-list 'yas-snippet-dirs
+             (concat root-dir "dicksonlabs/snippets/") t)
+;; use default html snippets in web-mode
+(add-hook 'web-mode-hook
+          #'(lambda () (yas-activate-extra-mode 'html-mode)))
+;; do this to make the web-mode-hook stick
+(yas-global-mode 1)

@@ -26,6 +26,7 @@
                       clojure-test-mode
                       coffee-mode
                       css-mode
+                      dropdown-list
                       expand-region
                       haml-mode
                       highlight-indentation
@@ -68,9 +69,6 @@
 (global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
 (global-set-key (kbd "M-#") 'linum-mode)
 (global-set-key (kbd "M-+") 'ido-mode)
-
-;; ack
-(global-set-key (kbd "C-c k") 'ack)
 
 ;; Save squiggle files somewhere out of the way
 (setq backup-directory-alist '(("." . "~/.saves")))
