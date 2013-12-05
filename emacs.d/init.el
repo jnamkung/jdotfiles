@@ -21,7 +21,7 @@
 ;;    or el-get, but this seems to work fine for now)
 (defvar my-packages '(ag
                       applescript-mode
-                      auto-complete
+                      ;; auto-complete
                       clojure-mode
                       clojure-test-mode
                       coffee-mode

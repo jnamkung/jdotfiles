@@ -4,11 +4,11 @@
 (global-set-key (kbd "C-c k") 'ag)
 
 ;; autocomplete
-(require 'auto-complete-config)
-(ac-config-default)
-;;(setq ac-ignore-case nil)
-;;(add-to-list 'ac-modes 'enh-ruby-mode)
-(add-to-list 'ac-modes 'web-mode)
+;; (require 'auto-complete-config)
+;; (ac-config-default)
+;; ;; (setq ac-ignore-case nil)
+;; ;; (add-to-list 'ac-modes 'enh-ruby-mode)
+;; (add-to-list 'ac-modes 'web-mode)
 
 ;; coffee
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
