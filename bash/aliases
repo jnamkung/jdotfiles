@@ -54,7 +54,8 @@ alias vx="open ~/Projects/dotfiles/applescript/MaximizeTerminalHeight.app"
 alias e='/usr/local/bin/emacsclient -n'
 
 # zeus aliases
-alias zt='zeus test'
+alias zt='zeus rspec'
+alias zpt='zeus parallel_rspec'
 alias zg='zeus generate'
 alias zr='zeus rake'
 alias zrr='zeus rake routes'
@@ -73,3 +74,6 @@ alias zgm='zeus-generate-migration'
 
 # open the last migration in emacs
 alias elm='e `find db/migrate | sort | tail -n 1 `'
+
+# rebuild parallel test dbs
+alias tdb='rm db/test_db*; rake parallel:create parallel:prepare parallel:seed'

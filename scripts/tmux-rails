@@ -69,7 +69,7 @@ else
     # only open a guard window if the project has a Guardfile.
     if [ -f $PWD/Guardfile ]; then
 	tmux new-window  -t "$PMATCH:" -n guard
-	tmux send-keys   -t "$PMATCH:" "cd .; rm db/test.sqlite3; RAILS_ENV=test rake db:setup; bundle exec guard" C-m
+	tmux send-keys   -t "$PMATCH:" "cd .; rm db/test_db*; rake parallel:create parallel:prepare parallel:seed; bundle exec guard" C-m
     fi
 
     # open a foreman window if a Procfile is present
@@ -80,13 +80,13 @@ else
 
     # start zeus!
     tmux new-window -t "$PMATCH:" -n zeus
-    tmux send-keys  -t "$PMATCH:" "cd .; zeus start" C-m
+    tmux send-keys  -t "$PMATCH:" "cd .; bundle exec zeus start" C-m
 
     # pianobar is essential!
-    # if [ command -v pianobar ]; then
+    if [ `command -v pianobar` ]; then
         tmux new-window -t "$PMATCH:" -n pianobar
         tmux send-keys  -t "$PMATCH:" "pianobar" C-m
-    # fi
+    fi
 
     # if you reorder the windows, make sure this guy is set to the number you want.
     tmux select-window  -t "$PMATCH:2"

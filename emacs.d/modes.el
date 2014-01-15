@@ -91,7 +91,8 @@
              (setq scss-compile-at-save nil) ) )
 
 ;; web-mode
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\html.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\text.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 
