@@ -80,6 +80,8 @@
 (setq auto-mode-alist (append '(("\\.rb$"   . ruby-mode)
                                 ("\\.rake$"   . ruby-mode)
                                 ("\\.builder$" . ruby-mode)
+                                ("\\.gemspec$" . ruby-mode)
+                                ("\\.rabl$"    . ruby-mode)
                                 ("Rakefile"   . ruby-mode)
                                 ("Capfile"   . ruby-mode)
                                 ("Gemfile"   . ruby-mode)
