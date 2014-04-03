@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 # -*- ruby -*-
 
-puts "Using #{__FILE__}"
+# puts "Using #{__FILE__}"
 
 begin
   require 'hirb'
@@ -19,8 +19,9 @@ begin
     Hirb.enable :output => {"ActiveRecord::Base" => {:class => :auto_table, :options => {:vertical => false}}}
   end
 rescue LoadError => e
-  puts "Unable to load and/or enable Hirb"
-  puts e.inspect
+  # NOTE: puts interferes with 'robe-mode'
+  # puts "Unable to load and/or enable Hirb"
+  # puts e.inspect
 end
 
 begin

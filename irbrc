@@ -9,7 +9,7 @@ IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
-puts "Using #{__FILE__}"
+# puts "Using #{__FILE__}"
 
 %w[rubygems looksee/shortcuts].each do |gem|
   begin
@@ -23,16 +23,16 @@ begin
   Wirble.init
   Wirble.colorize
 rescue LoadError => e
-  puts "Unable to require and/or initialize 'wirble'"
-  puts e.inspect
+  # puts "Unable to require and/or initialize 'wirble'"
+  # puts e.inspect
 end
 
 begin
   require 'hirb'
   Hirb.enable
 rescue LoadError => e
-  puts "Unable to load and/or enable 'hirb'"
-  puts e.inspect
+  # puts "Unable to load and/or enable 'hirb'"
+  # puts e.inspect
 end
 
 class Object
@@ -84,9 +84,7 @@ def paste
 end
 
 if ($0 == 'irb' && ENV['RAILS_ENV']) || ($0 =~ /rails/ && Rails.env)
-  puts "IRB running in Rails context, loading .railsrc file"
   load File.dirname(__FILE__) + '/.railsrc'
 else
-  puts "IRB running outside of rails context"
   puts $0
 end
