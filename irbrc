@@ -9,6 +9,8 @@ IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
+puts "Using #{__FILE__}"
+
 %w[rubygems looksee/shortcuts].each do |gem|
   begin
     require gem
@@ -20,9 +22,17 @@ begin
   require 'wirble'
   Wirble.init
   Wirble.colorize
-  require 'hirb' # sudo gem install cldwalker-hirb --source http://gems.github.com
+rescue LoadError => e
+  puts "Unable to require and/or initialize 'wirble'"
+  puts e.inspect
+end
+
+begin
+  require 'hirb'
   Hirb.enable
-rescue LoadError
+rescue LoadError => e
+  puts "Unable to load and/or enable 'hirb'"
+  puts e.inspect
 end
 
 class Object
@@ -73,4 +83,10 @@ def paste
   `pbpaste`
 end
 
-load File.dirname(__FILE__) + '/.railsrc' if ($0 == 'irb' && ENV['RAILS_ENV']) || ($0 == 'script/rails' && Rails.env)
+if ($0 == 'irb' && ENV['RAILS_ENV']) || ($0 =~ /rails/ && Rails.env)
+  puts "IRB running in Rails context, loading .railsrc file"
+  load File.dirname(__FILE__) + '/.railsrc'
+else
+  puts "IRB running outside of rails context"
+  puts $0
+end

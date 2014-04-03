@@ -1,9 +1,11 @@
 #!/usr/bin/ruby
 # -*- ruby -*-
 
+puts "Using #{__FILE__}"
+
 begin
   require 'hirb'
-  puts "railsrc enabling hirb"
+  puts "railsrc: enabling hirb"
 
   Hirb.enable pager: !(ENV['PAGER'] && "cat" == ENV['PAGER'].split(File::SEPARATOR).last)
 
@@ -16,7 +18,9 @@ begin
     Hirb.disable
     Hirb.enable :output => {"ActiveRecord::Base" => {:class => :auto_table, :options => {:vertical => false}}}
   end
-rescue LoadError
+rescue LoadError => e
+  puts "Unable to load and/or enable Hirb"
+  puts e.inspect
 end
 
 begin
