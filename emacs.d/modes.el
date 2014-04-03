@@ -36,7 +36,7 @@
 (add-hook 'coffee-mode-hook
          (lambda () (highlight-indentation-current-column-mode)))
 (add-hook 'js-mode-hook
-         (lambda () (highlight-indentation-mode)))
+         (lambda () (highlight-indentation-current-column-mode)))
 
 ;; io -- Note: as of 9/2013 there was no io-mode on marmalade.
 (add-to-list 'load-path "~/.emacs.d/io-mode")
