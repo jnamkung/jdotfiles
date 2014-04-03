@@ -88,7 +88,8 @@
 ;; sass - don't compile on save
 (add-hook 'scss-mode-hook
           '(lambda ()
-             (setq scss-compile-at-save nil) ) )
+             (setq scss-compile-at-save nil)
+             (setq css-indent-offset 2)))
 
 ;; web-mode
 (add-to-list 'auto-mode-alist '("\\html.erb\\'" . web-mode))
