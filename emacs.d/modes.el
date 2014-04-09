@@ -46,6 +46,7 @@
 ;; js-mode
 (setq js-indent-level 2)
 (add-to-list 'auto-mode-alist '("\\.js.erb$" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.js.jsx$" . js-mode))
 
 ;; mysql cnf files
 (add-to-list 'auto-mode-alist '("\\.cnf$" . conf-mode))

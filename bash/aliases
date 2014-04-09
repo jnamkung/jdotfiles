@@ -33,6 +33,7 @@ alias hol="cd ~/Projects/hol/"
 alias holr="cd ~/Projects/hol-rails/"
 alias ackphp="ack --ignore-dir=tests --php"
 alias dush="du -sh ."
+alias rvmr="rvm current"
 
 alias g='git'
 alias gs='git status'
@@ -79,4 +80,4 @@ alias zgm='zeus-generate-migration'
 alias elm='e `find db/migrate | sort | tail -n 1 `'
 
 # rebuild parallel test dbs
-alias tdb='rm db/test_db*; rake parallel:create parallel:prepare parallel:seed'
+alias tdb='rm db/test_db*; bundle exec rake parallel:create parallel:prepare parallel:seed'
