@@ -35,7 +35,8 @@ PMATCH=`echo "$PROJECT" | tr \. \?`
 # tmux barfs on session names with '.' in them.  Inconvenient if your project name has a version number in it.
 #PROJECT=`echo -n "$PROJECT" | tr \. _`
 
-PORT=`ruby -e 'puts (ARGV[0][0].upcase.ord - 65) + (ARGV[0][-1].upcase.ord - 65) * 100 + 3000' $PROJECT`
+# PORT=`ruby -e 'puts (ARGV[0][0].upcase.ord - 65) + (ARGV[0][-1].upcase.ord - 65) * 100 + 3000' $PROJECT`
+PORT=4712
 
 tmux start-server
 
