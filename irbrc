@@ -23,16 +23,14 @@ begin
   Wirble.init
   Wirble.colorize
 rescue LoadError => e
-  # puts "Unable to require and/or initialize 'wirble'"
-  # puts e.inspect
+  # output on error deliberately suppressed for emacs robe-mode
 end
 
 begin
   require 'hirb'
   Hirb.enable
 rescue LoadError => e
-  # puts "Unable to load and/or enable 'hirb'"
-  # puts e.inspect
+  # output on error deliberately suppressed for emacs robe-mode
 end
 
 class Object

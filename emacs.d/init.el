@@ -31,7 +31,6 @@
                       haml-mode
                       highlight-indentation
                       markdown-mode
-                      nrepl
                       php-mode
                       rainbow-mode
                       robe
