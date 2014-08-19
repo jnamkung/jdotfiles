@@ -54,6 +54,11 @@ alias ber='bundle exec rspec'
 alias be='bundle exec'
 alias vx="open ~/Projects/dotfiles/applescript/MaximizeTerminalHeight.app"
 
+# runs rubocop -- analysis
+alias rubo="rubocop -R -D ."
+# runs rubocop -- fix in place
+alias rubox="rubocop -a -R -D ."
+
 # requires server_mode
 alias e='/usr/local/bin/emacsclient -n'
 
