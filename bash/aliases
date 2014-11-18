@@ -29,10 +29,12 @@ alias m="mate"
 alias r3="rvm use 1.9.2-head@rails3"
 alias rr="rake routes | less -S"
 alias rdm="rake db:migrate"
+alias rdr="rake db:rollback"
 alias rdmt="RAILS_ENV=test rake db:migrate"
 alias hol="cd ~/Projects/hol/"
 alias holr="cd ~/Projects/hol-rails/"
 alias ackphp="ack --ignore-dir=tests --php"
+alias arg="ag --ignore-dir=tmp --ignore-dir=log"
 alias dush="du -sh ."
 alias rvmr="rvm current"
 
@@ -87,3 +89,6 @@ alias elm='e `find db/migrate | sort | tail -n 1 `'
 
 # rebuild parallel test dbs
 alias tdb='rm db/test_db*; bundle exec rake parallel:create parallel:prepare parallel:seed'
+
+alias tp='rake parallel:prepare'
+alias ppr='rake parallel:spec'
