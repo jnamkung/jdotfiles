@@ -92,3 +92,4 @@ alias tdb='rm db/test_db*; bundle exec rake parallel:create parallel:prepare par
 
 alias tp='rake parallel:prepare'
 alias ppr='rake parallel:spec'
+alias tpm='rake parallel:migrate'
