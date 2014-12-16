@@ -70,7 +70,7 @@ else
     # only open a guard window if the project has a Guardfile.
     if [ -f $PWD/Guardfile ]; then
 	tmux new-window  -t "$PMATCH:" -n guard
-	tmux send-keys   -t "$PMATCH:" "cd .; rm db/test_db*; rake parallel:create parallel:prepare parallel:seed; bundle exec guard" C-m
+	tmux send-keys   -t "$PMATCH:" "cd .; bundle exec guard" C-m
     fi
 
     # open a foreman window if a Procfile is present
