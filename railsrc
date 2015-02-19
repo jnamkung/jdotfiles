@@ -67,7 +67,7 @@ end
 
 def show_routes_fur_zero match = ".*"
   match = match.to_s
-  routes = raw_routes.select {|r| "#{r.name.to_s}\t#{r.verb}\t#{r.path.spec.to_s}" =~ /#{match}/}
+  routes = raw_routes.select {|r| "#{r.name.to_s}\t#{r.verb}\t#{r.path.spec.to_s}\t#{r.requirements[:controller]}##{r.requirements[:action]}" =~ /#{match}/}
   require 'action_dispatch/routing/inspector'
   inspector = ActionDispatch::Routing::RoutesInspector.new(routes)
   routes_formatted = inspector.format(ActionDispatch::Routing::ConsoleFormatter.new, ENV['CONTROLLER'])
