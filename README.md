@@ -53,3 +53,18 @@ Second, add this to your `.localrc`
 If you want to use notification center instead of growlnotify (i.e. for `git dude`), you can:
 
     sudo cp scripts/growlnotify-replacement /usr/local/bin/growlnotify; chmod a+x /usr/local/bin/growlnotify
+
+### allow underlining in terminal emacs under tmux
+
+Taken from [here](http://superuser.com/questions/529655/correct-way-to-get-emacs-16-color-support-inside-tmux).
+build a custom terminfo entry that clears ncv with a command like this:
+
+    { infocmp -x screen-256color; printf '\t%s\n' 'ncv@,'; } > /tmp/t && tic -x /tmp/t
+
+(when run as non-root, it will write a new screen-256color entry under ~/.terminfo/)
+
+### install jshint and jsxhint for editing js/jsx in emacs:
+
+    brew install node
+    npm install jshint -g
+    npm install jsxhint -g

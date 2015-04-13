@@ -1,0 +1,79 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+require 'pp'
+
+DEBUG = false
+
+def usage
+  puts "#{__FILE__} <source-file> ..."
+  puts "source-file should be relative to app/assets/javascripts/, and include any extensions (.coffee, .jsx, etc)"
+end
+
+# the sprockets cache dir for the Rails 'development' environment
+development_cache_root = 'tmp/cache/assets/development/'
+sprockets_cache = development_cache_root + 'sprockets/'
+
+unless File.directory?(sprockets_cache)
+  puts "run #{__FILE__} from your rails root directory"
+  puts "load your app in your browser (in your development environment) before running #{__FILE__}"
+  exit 1
+end
+
+#
+# READ
+
+d = Dir.new(sprockets_cache)
+
+# load up all the cached objects in the directory
+cache_files = d.reject { |f| f[0] == "." }
+cache_hashes = cache_files.map { |cf| Pathname.new(sprockets_cache + cf).open("rb") { |b| Marshal.load(b) } }
+
+# BundledAsset and ProcessedAsset are from Sprockets.
+#   A BundledAsset will include all the //=required files in .source(),
+#      and no dependency info
+#   A ProcessedAsset will indlude only the file's own code in .source(),
+#      but will have required_paths() and dependency_paths()
+#
+# We aren't using these classes here, just serialized hash representations of instances of them
+
+js_cache_hashes = {'BundledAsset' => {},'ProcessedAsset' => {}}
+cache_hashes.each do |ch|
+  next unless ch['content_type'] == 'application/javascript'
+  if js_cache_hashes.has_key? ch['logical_path']
+    js_cache_hashes[ch['class']][ch['logical_path']] = ch if (js_cache_hashes[ch['logical_path']]['mtime'] > ch['mtime'])
+  else
+    js_cache_hashes[ch['class']][ch['logical_path']] = ch
+  end
+end
+
+if DEBUG
+  puts "Bundled asset files cached: " + js_cache_hashes['BundledAsset'].keys.length.to_s
+  puts "Processed asset files cached: " + js_cache_hashes['ProcessedAsset'].keys.length.to_s
+end
+
+#
+# WRITE
+
+files = []
+
+if ARGV.any?
+  files = ARGV
+else
+  files = (js_cache_hashes['BundledAsset'].keys + js_cache_hashes['ProcessedAsset'].keys).uniq
+end
+
+base = Pathname.new(development_cache_root + "sprockets_dump/")
+
+files.each do |f|
+  if js_cache_hashes['BundledAsset'].has_key? f
+    path = base + 'bundled' + f
+    path.dirname.mkpath
+    path.write(js_cache_hashes['BundledAsset'][f]['source'])
+  end
+  if js_cache_hashes['ProcessedAsset'].has_key? f
+    path = base + 'processed' + f
+    path.dirname.mkpath
+    path.write(js_cache_hashes['ProcessedAsset'][f]['source'])
+  end
+end

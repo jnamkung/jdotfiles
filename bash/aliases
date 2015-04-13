@@ -24,6 +24,7 @@ alias ll="ls -l"
 alias la='ls -A'
 alias l='ls -CF'
 alias e="emacs"
+alias emax="sed -e 's/ -nw //' `which emacs` | sh &"
 alias treesdb="cd ~/Dropbox/Dickson\\ Labs/treesdb"
 alias m="mate"
 alias r3="rvm use 1.9.2-head@rails3"

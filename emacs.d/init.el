@@ -28,13 +28,13 @@
                       css-mode
                       dropdown-list
                       expand-region
+                      flycheck
                       haml-mode
                       highlight-indentation
                       markdown-mode
                       php-mode
                       rainbow-mode
                       robe
-                      smartparens
                       scala-mode2
                       scss-mode
                       slim-mode
