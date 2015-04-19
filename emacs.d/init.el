@@ -23,7 +23,6 @@
                       applescript-mode
                       ;; auto-complete
                       clojure-mode
-                      clojure-test-mode
                       coffee-mode
                       css-mode
                       dropdown-list
@@ -31,6 +30,8 @@
                       flycheck
                       haml-mode
                       highlight-indentation
+                      js2-mode
+                      json-mode
                       markdown-mode
                       php-mode
                       rainbow-mode
