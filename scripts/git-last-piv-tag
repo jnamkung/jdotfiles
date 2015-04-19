@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+log = `git log -500`.split("\n")
+tags = []
+log.each do |l|
+  tags = l.scan(/\[\#\d+\]/)
+  break if tags.any?
+end
+puts tags.join
