@@ -54,6 +54,7 @@ alias gpo='git pull origin'
 alias gpr='git pull --rebase origin'
 alias gpu='git push origin'
 alias glpt='git-last-piv-tag'
+alias gplt='git-last-piv-tag'
 
 alias ber='bundle exec rspec'
 alias be='bundle exec'
