@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+class String
+  # colorization
+  def colorize(color_code)
+    "\e[#{color_code}m#{self}\e[0m"
+  end
+
+  def red
+    colorize(31)
+  end
+
+  def yellow
+    colorize(33)
+  end
+end
+
+tags = `git tag`.split
+
+if ARGV.any?
+  show_hint = false
+  deleted = 0
+  puts "deleting #{ARGV.length} remote tag#{ARGV.length > 1 ? 's' : ''}..."
+  ARGV.each do |arg|
+    if tags.include? arg
+      if system("git tag -d #{arg}")
+        if system("git push origin :refs/tags/#{arg}")
+          deleted += 1
+        else
+          puts "failed:  ".red + "git push origin :refs/tags/#{arg}"
+        end
+      else
+        puts "failed:  ".red + "git tag -d #{arg}"
+      end
+    else
+      puts "tag not found: \"#{arg}\"."
+      show_hint = true
+    end
+  end
+  if show_hint
+    puts "You may need to 'git fetch --prune --tags' to get remote tags that are not in your local repo"
+  end
+  if deleted > 0
+    puts "deleted #{deleted} tag#{deleted > 1 ? 's' : '' }."
+    puts "You should tell all other committers to run 'git fetch --prune --tags' now".yellow
+  else
+    puts "no tags deleted.".red
+  end
+else
+  puts "usage: #{$0} tag [tag ...]"
+end
