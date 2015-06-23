@@ -19,10 +19,10 @@ elif ls -G -d . >/dev/null 2>&1; then
     declare -x CLICOLOR=1
 fi
 alias sa="source ~/.bash/aliases"
-alias ls="ls -F"
+alias ls="ls -FH"
 alias ll="ls -l"
 alias la='ls -A'
-alias l='ls -CF'
+alias l='ls -CFH'
 alias e="emacs"
 alias emax="sed -e 's/ -nw //' `which emacs` | sh &"
 alias treesdb="cd ~/Dropbox/Dickson\\ Labs/treesdb"
