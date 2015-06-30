@@ -4,7 +4,6 @@
 (load-lib-dir ".")
 (load-lib-dir "./lib")
 
-
 ;;;; package management
 (require 'package)
 (add-to-list 'package-archives

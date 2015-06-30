@@ -42,6 +42,10 @@
 ;; js-mode
 (setq js-indent-level 2)
 (add-to-list 'auto-mode-alist '("\\.js.erb$" . js-mode))
+
+;; js2-mode for es6
+(add-to-list 'auto-mode-alist '("\\.es6$" . js2-mode))
+
 ;; js inline error checking
 (require 'flycheck)
 (add-hook 'js-mode-hook
