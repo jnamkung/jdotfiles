@@ -1,0 +1,52 @@
+if &compatible
+  set nocompatible
+end
+
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
+
+" Let Vundle manage Vundle
+Plugin 'gmarik/Vundle.vim'
+
+" Define bundles via Github repos
+" Plugin 'christoomey/vim-run-interactive'
+" Plugin 'pbrisbin/vim-mkdir'
+" Plugin 'tpope/vim-bundler'
+" Plugin 'tpope/vim-eunuch'
+" Plugin 'tpope/vim-rails'
+" Plugin 'vim-scripts/matchit.zip'
+
+Plugin 'kien/ctrlp.vim.git'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'vim-scripts/tComment'
+Plugin 'vim-scripts/ctags.vim'
+Plugin 'floobits/floobits-neovim'
+"Plugin 'wincent/Command-T'
+Plugin 'croaky/vim-colors-github'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'puppetlabs/puppet-syntax-vim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'AndrewRadev/vim-eco'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'pangloss/vim-javascript'
+Plugin 'elzr/vim-json'
+Plugin 'mxw/vim-jsx'
+Plugin 'groenewege/vim-less'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'slim-template/vim-slim'
+Plugin 'millermedeiros/vim-statline'
+Plugin 'rking/ag.vim'
+
+if filereadable(expand("~/.vimrc.bundles.local"))
+  source ~/.vimrc.bundles.local
+endif
+
+call vundle#end()
+filetype on

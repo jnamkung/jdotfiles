@@ -99,9 +99,6 @@
 (require 'rcodetools)
 (define-key ruby-mode-map (kbd "C-c C-z") 'xmp)
 
-
-
-
 ;; DO THIS LAST
 
 ;; load .emacs_local.el, if present
