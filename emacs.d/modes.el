@@ -15,58 +15,66 @@
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 (custom-set-variables '(coffee-tab-width 2))
 
-;; erlang -- Note: we use the one that comes with brew,
-;;           it's more up-to-date then
-;;        -- then the one that is (currently?) on marmalade.
-(add-to-list 'load-path "~/.emacs.d/erlang-mode")
-(require 'erlang-start)
-
 ;; expand-region
 (require 'expand-region)
 (global-set-key (kbd "C-c o") 'er/expand-region)
 
+;; flycheck
+(require 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+;; disable jshint
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint)))
+;; use eslint with web-mode for jsx files
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+
+
+;; highlight-indentation commented out until fixed with newer web-mode:
+;; https://github.com/antonj/Highlight-Indentation-for-Emacs/pull/27
+;;
 ;; highlight-indentation
-(require 'highlight-indentation)
-(add-hook 'ruby-mode-hook
-         (lambda () (highlight-indentation-current-column-mode)))
-(add-hook 'coffee-mode-hook
-         (lambda () (highlight-indentation-current-column-mode)))
-(add-hook 'js-mode-hook
-         (lambda () (highlight-indentation-current-column-mode)))
+;; (require 'highlight-indentation)
+;; (add-hook 'ruby-mode-hook
+;;          (lambda () (highlight-indentation-current-column-mode)))
+;; (add-hook 'coffee-mode-hook
+;;          (lambda () (highlight-indentation-current-column-mode)))
+;; (add-hook 'js-mode-hook
+;;          (lambda () (highlight-indentation-current-column-mode)))
+;; (add-hook 'js2-mode-hook
+;;          (lambda () (highlight-indentation-current-column-mode)))
+;; (add-hook 'web-mode-hook
+;;          (lambda () (highlight-indentation-current-column-mode)))
 
 ;; io -- Note: as of 9/2013 there was no io-mode on marmalade.
 (add-to-list 'load-path "~/.emacs.d/io-mode")
 (autoload 'io-mode "io-mode" "Mode for editing Io files" t)
 (add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
 
-;; js-mode
+;; js-mode, js2-mode
 (setq js-indent-level 2)
-(add-to-list 'auto-mode-alist '("\\.js.erb$" . js-mode))
 
-;; js2-mode for es6
-(add-to-list 'auto-mode-alist '("\\.es6$" . js2-mode))
-
-;; js inline error checking
+;; inline error checking via flycheck
 (require 'flycheck)
 (add-hook 'js-mode-hook
           (lambda () (flycheck-mode t)))
 
 ;; jsx syntax highlighting - see web-mode below
 ;; jsx inline error checking
-(flycheck-define-checker jsxhint-checker
-  "A JSX syntax and style checker based on JSXHint."
-  :command ("jsxhint"
-            (config-file "--config" flycheck-jshintrc)
-            source)
-  :error-patterns
-  ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-  :modes (web-mode))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (equal web-mode-content-type "jsx")
-              ;; enable flycheck
-              (flycheck-select-checker 'jsxhint-checker)
-              (flycheck-mode))))
+;; (flycheck-define-checker jsxhint-checker
+;;   "A JSX syntax and style checker based on JSXHint."
+;;   :command ("jsxhint"
+;;             (config-file "--config" flycheck-jshintrc)
+;;             source)
+;;   :error-patterns
+;;   ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
+;;   :modes (web-mode))
+;; (add-hook 'web-mode-hook
+;;           (lambda ()
+;;             (when (equal web-mode-content-type "jsx")
+;;               ;; enable flycheck
+;;               (flycheck-select-checker 'jsxhint-checker)
+;;               (flycheck-mode))))
 
 ;; mysql cnf files
 (add-to-list 'auto-mode-alist '("\\.cnf$" . conf-mode))
@@ -118,17 +126,23 @@
 ;; web-mode
 (add-to-list 'auto-mode-alist '("\\html.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\text.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js.erb$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.es6$" . web-mode))
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
+
+;; tell web-mode to treat .es6 files as jsx
+(setq web-mode-content-types-alist '(("jsx"  . "\\.es6\\'")))
+
 ;; use web-mode for jsx - https://truongtx.me/2014/03/10/emacs-setup-jsx-mode-and-jsx-syntax-checking/
-(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
 (defadvice web-mode-highlight-part (around tweak-jsx activate)
   (if (equal web-mode-content-type "jsx")
       (let ((web-mode-enable-part-face nil))
         ad-do-it)
-        ad-do-it))
+    ad-do-it))
 
 ;; Yasnippet
 (require 'yasnippet)

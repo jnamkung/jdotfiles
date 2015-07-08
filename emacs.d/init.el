@@ -70,7 +70,8 @@
 (global-set-key (kbd "M-+") 'ido-mode)
 
 ;; Save squiggle files somewhere out of the way
-(setq backup-directory-alist '(("." . "~/.saves")))
+(make-directory "~/.emacs_saves" t)
+(setq backup-directory-alist '(("." . "~/.emacs_saves")))
 
 (load-lib "modes")
 
