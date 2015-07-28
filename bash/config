@@ -20,4 +20,6 @@ export HISTSIZE=65535
 export HISTFILESIZE=$HISTSIZE
 
 # for qt5 on OSX
-export QMAKE=`/bin/ls -c /usr/local/Cellar/qt5/*/bin/qmake | tail -1`
+if [ -d /usr/local/Cellar/qt5 ]; then
+   export QMAKE=`/bin/ls -c /usr/local/Cellar/qt5/*/bin/qmake | tail -1`
+fi	  
