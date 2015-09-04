@@ -88,7 +88,7 @@ alias zc='zeus console'
 alias zgm='zeus-generate-migration'
 
 # open the last migration in emacs
-alias elm='e `find db/migrate | sort | tail -n 1 `'
+# alias elm='e `find db/migrate | sort | tail -n 1 `'
 
 # rebuild parallel test dbs
 alias tdb='rm db/test_db*; bundle exec rake parallel:create parallel:prepare parallel:seed'
