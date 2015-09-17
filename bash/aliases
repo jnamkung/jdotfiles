@@ -90,9 +90,13 @@ alias zgm='zeus-generate-migration'
 # open the last migration in emacs
 alias elm='e `find db/migrate | sort | tail -n 1 `'
 
-# rebuild parallel test dbs
-alias tdb='rm db/test_db*; bundle exec rake parallel:create parallel:prepare parallel:seed'
+# parallel_tests aliases
 
-alias tp='rake parallel:prepare'
-alias ppr='rake parallel:spec'
-alias tpm='rake parallel:migrate'
+# rebuild test dbs
+alias pdb='rm db/test_db*; bundle exec rake parallel:create parallel:prepare parallel:seed'
+# migrate test dbs
+alias pdm='rake parallel:migrate'
+# run all tests (OSS only, run from project root only)
+alias pspec='./bin/parallel_specs'
+alias ppt=pspec
+alias ppr=pspec

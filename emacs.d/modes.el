@@ -76,6 +76,10 @@
 ;;               (flycheck-select-checker 'jsxhint-checker)
 ;;               (flycheck-mode))))
 
+;; multiple-cursors
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
 ;; mysql cnf files
 (add-to-list 'auto-mode-alist '("\\.cnf$" . conf-mode))
 
