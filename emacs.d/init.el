@@ -32,6 +32,7 @@
                       js2-mode
                       json-mode
                       markdown-mode
+                      multiple-cursors
                       php-mode
                       rainbow-mode
                       robe
