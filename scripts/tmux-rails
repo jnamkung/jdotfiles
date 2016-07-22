@@ -54,7 +54,7 @@ else
     # window identifier.  Which we don't want.
 
     tmux new-session -s "$PROJECT" -d -n server
-    tmux send-keys   -t "$PMATCH:" "rails s -p $PORT" C-m
+    tmux send-keys   -t "$PMATCH:" "rails s -p $PORT -b 0.0.0.0" C-m
 
     tmux new-window  -t "$PMATCH:" -n emacs
     tmux send-keys   -t "$PMATCH:" "emacs" C-m
