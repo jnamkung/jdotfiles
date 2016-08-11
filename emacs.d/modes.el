@@ -181,5 +181,13 @@
 (require 'rvm)
 (rvm-autodetect-ruby) ;;
 
+;; Cycle between snake case, camel case, etc.
+(require 'string-inflection)
+(global-set-key (kbd "C-c i") 'string-inflection-cycle)
+(global-set-key (kbd "C-c c") 'string-inflection-camelcase)        ;; Force to CamelCase
+(global-set-key (kbd "C-c l") 'string-inflection-lower-camelcase)  ;; Force to lowerCamelCase
+(global-set-key (kbd "C-c j") 'string-inflection-java-style-cycle) ;; Cycle through Java styles
+
+
 (provide 'modes)
 ;;; modes.el ends here
