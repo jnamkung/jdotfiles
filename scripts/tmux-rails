@@ -20,7 +20,7 @@ PROJECT=`basename $PWD`
 #FUN FACT:
 
 # in the -t option available with most tmux commands, the '.' character has special meaning, indicating a
-# pane withing a window.  So if you've got a project in a directory named "foo-v4.8", and you use that as
+# pane within a window.  So if you've got a project in a directory named "foo-v4.8", and you use that as
 # your session name as well, and then you do 'tmux some-command -t foo-v4.8', then tmux will try
 # to target pane 8 of window 0 in session "foo-v4".  Which is not what you want at all, as that session
 # doesn't even exist, let alone the pane.
@@ -32,19 +32,16 @@ PROJECT=`basename $PWD`
 
 PMATCH=`echo "$PROJECT" | tr \. \?`
 
-# tmux barfs on session names with '.' in them.  Inconvenient if your project name has a version number in it.
-#PROJECT=`echo -n "$PROJECT" | tr \. _`
-
-# PORT=`ruby -e 'puts (ARGV[0][0].upcase.ord - 65) + (ARGV[0][-1].upcase.ord - 65) * 100 + 3000' $PROJECT`
-PORT=4712
-
 tmux start-server
 
 if tmux has-session -t $PROJECT 2>/dev/null
 then
     tmux attach -t $PROJECT
 else
-    bundle
+    # bundle
+    find log -size +20M -delete
+    rm tmp/miniprofiler/*
+    rm tmp/capybara/*
 
     # the trailing colon after $PMATCH is the character that separates the
     # session name from the window name.  Leaving the window name empty
@@ -53,8 +50,8 @@ else
     # for send-keys, it will first try to interpret the session name as a
     # window identifier.  Which we don't want.
 
-    tmux new-session -s "$PROJECT" -d -n server
-    tmux send-keys   -t "$PMATCH:" "rails s -p $PORT -b 0.0.0.0" C-m
+    tmux new-session -s "$PROJECT" -d -n log
+    tmux send-keys   -t "$PMATCH:" "touch log/development.log && tail -f log/development.log" C-m
 
     tmux new-window  -t "$PMATCH:" -n emacs
     tmux send-keys   -t "$PMATCH:" "emacs" C-m
@@ -67,10 +64,12 @@ else
     tmux new-window  -t "$PMATCH:" -n db
     tmux send-keys   -t "$PMATCH:" "cd .; bundle exec rails db" C-m
 
-    # only open a guard window if the project has a Guardfile.
-    if [ -f $PWD/Guardfile ]; then
+    # only open a guard window if the project has a Guardfile and we've set an environment var.
+    if [ -f $PWD/Guardfile && -z $START_GUARD ]; then
 	tmux new-window  -t "$PMATCH:" -n guard
 	tmux send-keys   -t "$PMATCH:" "cd .; bundle exec guard" C-m
+    else
+	tmux new-window  -t "$PMATCH:" -n test
     fi
 
     # open a foreman window if a Procfile is present
