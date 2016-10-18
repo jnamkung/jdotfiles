@@ -54,7 +54,7 @@ else
     tmux send-keys   -t "$PMATCH:" "touch log/development.log && tail -f log/development.log" C-m
 
     tmux new-window  -t "$PMATCH:" -n emacs
-    tmux send-keys   -t "$PMATCH:" "emacs" C-m
+    tmux send-keys   -t "$PMATCH:" "emacs --no-windows" C-m
 
     tmux new-window  -t "$PMATCH:" -n shell
 

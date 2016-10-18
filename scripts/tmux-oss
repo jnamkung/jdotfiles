@@ -41,6 +41,11 @@ if tmux has-session -t $PROJECT 2>/dev/null
 then
     tmux attach -t $PROJECT
 else
+    # bundle
+    find log -size +20M -delete
+    rm tmp/miniprofiler/*
+    rm tmp/capybara/*
+
     # the trailing colon after $PMATCH is the character that separates the
     # session name from the window name.  Leaving the window name empty
     # means, for new-window, "use the next available window number".  for
@@ -50,7 +55,7 @@ else
 
     tmux new-session -s "$PROJECT" -d -n server
     tmux new-window -t "$PMATCH"
-    tmux send-keys   -t "$PMATCH:" "cd ~/Projects/OfficeSpace/huddle; teamocil --here --layout huddle.yml" C-m
+    tmux send-keys   -t "$PMATCH:" "cd ~/Projects/OfficeSpace/huddle; teamocil --here --layout huddle-react.yml" C-m
 
     tmux attach-session -t "$PMATCH"
 fi
