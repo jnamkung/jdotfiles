@@ -1,14 +1,17 @@
-;;;; Modes
+;;; Modes --- mode-specific initialization and configuration
+;;; Commentary:
+;;;   Try to keep things in here alphabetized by mode
+;;; Code:
 
 ;; ag (ag > ack)
 (global-set-key (kbd "C-c k") 'ag)
 
-;; autocomplete
-;; (require 'auto-complete-config)
-;; (ac-config-default)
-;; ;; (setq ac-ignore-case nil)
-;; ;; (add-to-list 'ac-modes 'enh-ruby-mode)
-;; (add-to-list 'ac-modes 'web-mode)
+;; buffer selection
+(require 'bs)
+(global-set-key (kbd "C-x C-b") 'bs-show) ; better buffer listings
+
+;; cnf files (e.g. mysql config files)
+(add-to-list 'auto-mode-alist '("\\.cnf$" . conf-mode))
 
 ;; coffee
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
@@ -22,13 +25,13 @@
 ;; flycheck
 (require 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'js-mode-hook (lambda () (flycheck-mode t)))
 (add-hook 'scss-mode-hook 'flycheck-mode);; disable jshint
 (setq-default flycheck-disabled-checkers
               (append flycheck-disabled-checkers
                       '(javascript-jshint)))
 ;; use eslint with web-mode for jsx files
 (flycheck-add-mode 'javascript-eslint 'web-mode)
-
 ;; use eslint from ./node_modules when available
 ;; see: http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
 (defun my/use-eslint-from-node-modules ()
@@ -40,79 +43,22 @@
                                         root))))
     (when (and eslint (file-executable-p eslint))
       (setq-local flycheck-javascript-eslint-executable eslint))))
-
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
-
-;; highlight-indentation commented out until fixed with newer web-mode:
-;; https://github.com/antonj/Highlight-Indentation-for-Emacs/pull/27
-;;
-;; highlight-indentation
-;; (require 'highlight-indentation)
-;; (add-hook 'ruby-mode-hook
-;;          (lambda () (highlight-indentation-current-column-mode)))
-;; (add-hook 'coffee-mode-hook
-;;          (lambda () (highlight-indentation-current-column-mode)))
-;; (add-hook 'js-mode-hook
-;;          (lambda () (highlight-indentation-current-column-mode)))
-;; (add-hook 'js2-mode-hook
-;;          (lambda () (highlight-indentation-current-column-mode)))
-;; (add-hook 'web-mode-hook
-;;          (lambda () (highlight-indentation-current-column-mode)))
-
-;; io -- Note: as of 9/2013 there was no io-mode on marmalade.
-(add-to-list 'load-path "~/.emacs.d/io-mode")
-(autoload 'io-mode "io-mode" "Mode for editing Io files" t)
-(add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
 
 ;; js-mode, js2-mode
 (setq js-indent-level 2)
 
-;; inline error checking via flycheck
-(require 'flycheck)
-(add-hook 'js-mode-hook
-          (lambda () (flycheck-mode t)))
-
-;; jsx syntax highlighting - see web-mode below
-;; jsx inline error checking
-;; (flycheck-define-checker jsxhint-checker
-;;   "A JSX syntax and style checker based on JSXHint."
-;;   :command ("jsxhint"
-;;             (config-file "--config" flycheck-jshintrc)
-;;             source)
-;;   :error-patterns
-;;   ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-;;   :modes (web-mode))
-;; (add-hook 'web-mode-hook
-;;           (lambda ()
-;;             (when (equal web-mode-content-type "jsx")
-;;               ;; enable flycheck
-;;               (flycheck-select-checker 'jsxhint-checker)
-;;               (flycheck-mode))))
+;; magit
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; multiple-cursors
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
-;; mysql cnf files
-(add-to-list 'auto-mode-alist '("\\.cnf$" . conf-mode))
-
 ;; markdown mode for *.md files.
 (add-to-list 'auto-mode-alist '("\.md$" . markdown-mode))
 
-;; php
-(add-hook 'php-mode-hook
-	  '(lambda () (define-abbrev php-mode-abbrev-table "ex" "extends")))
-(defun my-php-mode-common-hook ()
-  ;; my customizations for php-mode
-  (setq tab-width 4)
-  (setq c-basic-offset 4)
-  (c-set-offset 'topmost-intro-cont 4)
-  (c-set-offset 'class-open 0)
-  (c-set-offset 'inline-open 0)
-  (c-set-offset 'substatement-open 0)
-  (c-set-offset 'arglist-intro '+))
-
-;; rainbow mode -- for css
+;; rainbow mode - in css, display color specifiers in the color they specify
 ;; (autoload 'rainbow-mode "rainbow-mode")
 (setq rainbow-html-colors 'auto)
 
@@ -122,6 +68,7 @@
 (add-hook 'ruby-mode-hook 'robe-mode)
 
 ;; ruby
+(require 'ruby-mode)
 (autoload 'ruby-mode "ruby-mode" "Major mode for ruby files" t)
 (setq auto-mode-alist (append '(("\\.rb$"   . ruby-mode)
                                 ("\\.rake$"   . ruby-mode)
@@ -134,11 +81,22 @@
                                 ("Gemfile"   . ruby-mode)
 				) auto-mode-alist))
 
+;; rvm
+(require 'rvm)
+(rvm-autodetect-ruby)
+
 ;; sass - don't compile on save
 (add-hook 'scss-mode-hook
           '(lambda ()
              (setq scss-compile-at-save nil)
              (setq css-indent-offset 2)))
+
+;; string-inflection - cycle between snake case, camel case, etc.
+(require 'string-inflection)
+(global-set-key (kbd "C-c i") 'string-inflection-cycle)
+(global-set-key (kbd "C-c c") 'string-inflection-camelcase)        ;; Force to CamelCase
+(global-set-key (kbd "C-c l") 'string-inflection-lower-camelcase)  ;; Force to lowerCamelCase
+(global-set-key (kbd "C-c j") 'string-inflection-java-style-cycle) ;; Cycle through Java styles
 
 ;; web-mode
 (add-to-list 'auto-mode-alist '("\\html.erb\\'" . web-mode))
@@ -150,10 +108,8 @@
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
-
 ;; tell web-mode to treat .es6 files as jsx
 (setq web-mode-content-types-alist '(("jsx"  . "\\.es6\\'")))
-
 ;; use web-mode for jsx - https://truongtx.me/2014/03/10/emacs-setup-jsx-mode-and-jsx-syntax-checking/
 (defadvice web-mode-highlight-part (around tweak-jsx activate)
   (if (equal web-mode-content-type "jsx")
@@ -176,17 +132,6 @@
           #'(lambda () (yas-activate-extra-mode 'html-mode)))
 ;; do this to make the web-mode-hook stick
 (yas-global-mode 1)
-
-;; rvm
-(require 'rvm)
-(rvm-autodetect-ruby) ;;
-
-;; Cycle between snake case, camel case, etc.
-(require 'string-inflection)
-(global-set-key (kbd "C-c i") 'string-inflection-cycle)
-(global-set-key (kbd "C-c c") 'string-inflection-camelcase)        ;; Force to CamelCase
-(global-set-key (kbd "C-c l") 'string-inflection-lower-camelcase)  ;; Force to lowerCamelCase
-(global-set-key (kbd "C-c j") 'string-inflection-java-style-cycle) ;; Cycle through Java styles
 
 
 (provide 'modes)
