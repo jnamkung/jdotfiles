@@ -69,6 +69,7 @@
 
 ;; ruby
 (require 'ruby-mode)
+(setq ruby-align-chained-calls t)
 (autoload 'ruby-mode "ruby-mode" "Major mode for ruby files" t)
 (setq auto-mode-alist (append '(("\\.rb$"   . ruby-mode)
                                 ("\\.rake$"   . ruby-mode)
