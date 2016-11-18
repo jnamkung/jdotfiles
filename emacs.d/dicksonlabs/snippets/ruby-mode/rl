@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : rl
+# --
+Rails.logger.info("\n==============================")
+Rails.logger.info $0
+Rails.logger.info("==============================\n")
