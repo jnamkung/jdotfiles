@@ -20,7 +20,7 @@ elif ls -G -d . >/dev/null 2>&1; then
 fi
 
 # shl -> source-highlight with the useful options, if installed
-if type 'source-highlight' > /dev/null; then
+if type 'source-highlight' > /dev/null 2>&1; then
     shl() { source-highlight -f esc -o STDOUT -i $1; }
     export -f shl
 fi
