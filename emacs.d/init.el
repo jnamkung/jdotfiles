@@ -37,7 +37,6 @@
                       rainbow-mode
                       robe
                       rvm
-                      scala-mode2
                       scss-mode
                       slim-mode
                       web-mode
