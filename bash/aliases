@@ -18,6 +18,21 @@ elif ls -G -d . >/dev/null 2>&1; then
     #BSD ls
     declare -x CLICOLOR=1
 fi
+
+# shl -> source-highlight with the useful options, if installed
+if type 'source-highlight' > /dev/null; then
+    shl() { source-highlight -f esc -o STDOUT -i $1; }
+    export -f shl
+fi
+
+# Override RAILS_PRODUCTION_ROOT in your .localrc as needed
+RAILS_PRODUCTION_ROOT=/www/hol/current
+railsp() { cd $RAILS_PRODUCTION_ROOT; RAILS_ENV="production" bundle exec rails $@; }
+export -f railsp
+rakep() { cd $RAILS_PRODUCTION_ROOT; RAILS_ENV="production" bundle exec rake $@; }
+export -f rakep
+alias rpc="railsp c"
+
 alias sa="source ~/.bash/aliases"
 alias ls="ls -FH"
 alias ll="ls -l"
