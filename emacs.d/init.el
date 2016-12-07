@@ -39,6 +39,7 @@
                       rvm
                       scss-mode
                       slim-mode
+		      string-inflection
                       web-mode
                       yaml-mode
                       yasnippet))
