@@ -21,7 +21,7 @@ fi
 
 # shl -> source-highlight with the useful options, if installed
 if type 'source-highlight' > /dev/null 2>&1; then
-    shl() { source-highlight -f esc -o STDOUT -i $1; }
+    shl() { source-highlight -f esc --style-file=esc.style -o STDOUT -i $1; }
     export -f shl
 fi
 
