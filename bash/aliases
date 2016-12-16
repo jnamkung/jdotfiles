@@ -13,10 +13,11 @@ alias reload='. ~/.bash_profile'
 alias fack="find . | grep -v '~' | ack -i $*"
 if ls --color -d . >/dev/null 2>&1; then
     #GNU ls
-    alias ls="ls --color=auto"
+    alias ls="ls --color=auto -FH"
 elif ls -G -d . >/dev/null 2>&1; then
     #BSD ls
     declare -x CLICOLOR=1
+    alias ls="ls -FH"
 fi
 
 # shl -> source-highlight with the useful options, if installed
@@ -34,7 +35,6 @@ export -f rakep
 alias rpc="railsp c"
 
 alias sa="source ~/.bash/aliases"
-alias ls="ls -FH"
 alias ll="ls -l"
 alias la='ls -A'
 alias l='ls -CFH'
