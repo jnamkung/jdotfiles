@@ -11,15 +11,16 @@
 # These don't carry through to subshells so they go here instead of
 # .bash_profile
 
+# source a .bashrc.orig, if it exists
+[[ -s "$HOME/.bashrc.orig" ]] && source "$HOME/.bashrc.orig"
+
 source ~/.bash/aliases
 source ~/.bash/completions
 source ~/.bash/config
 source ~/.bash/colorfixes
 
-# Use .localrc for settings specific to one system.
-if [ -f ~/.localrc ]; then
-    source ~/.localrc
-fi
+# Use .localrc for settings specific to one system
+[[ -s "$HOME/.localrc" ]] && source "$HOME/.localrc"
 
 # RVM comes last
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
