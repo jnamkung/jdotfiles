@@ -21,19 +21,16 @@
 (defvar my-packages '(ag
                       applescript-mode
                       ;; auto-complete
-                      clojure-mode
                       coffee-mode
                       css-mode
                       dropdown-list
                       expand-region
                       flycheck
-                      haml-mode
                       highlight-indentation
                       js2-mode
                       json-mode
                       markdown-mode
                       multiple-cursors
-                      php-mode
                       rainbow-mode
                       robe
                       rvm
