@@ -8,9 +8,10 @@
 # for Mac users
 .DS_Store
 
-emacs.d/ac-comphist.dat
 emacs.d/abbrev_defs
+emacs.d/ac-comphist.dat
 emacs.d/elpa/
 emacs.d/ensime
-emacs.d/url/
 emacs.d/history
+emacs.d/network-security.data
+emacs.d/url/

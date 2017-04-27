@@ -32,18 +32,18 @@
                       '(javascript-jshint)))
 ;; use eslint with web-mode for jsx files
 (flycheck-add-mode 'javascript-eslint 'web-mode)
-;; use eslint from ./node_modules when available
+;; use eslint from ./node_modules or ./bin when available
 ;; see: http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
-(defun my/use-eslint-from-node-modules ()
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (eslint (and root
-                      (expand-file-name "node_modules/eslint/bin/eslint.js"
-                                        root))))
-    (when (and eslint (file-executable-p eslint))
-      (setq-local flycheck-javascript-eslint-executable eslint))))
-(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+(defun my/use-eslint-from-local-project ()
+ (let* ((root (condition-case nil (projectile-project-root) (error nil)))
+        (eslint-node (expand-file-name "node_modules/eslint/bin/eslint.js" root))
+        (eslint-binstub (expand-file-name "bin/eslint" root)))
+   (when (file-executable-p eslint-node)
+     (setq-local flycheck-javascript-eslint-executable eslint-node))
+   (when (file-executable-p eslint-binstub)
+     (setq-local flycheck-javascript-eslint-executable eslint-binstub))))
+(add-hook 'flycheck-mode-hook #'my/use-eslint-from-local-project)
+
 
 ;; js-mode, js2-mode
 (setq js-indent-level 2)
@@ -57,6 +57,9 @@
 
 ;; markdown mode for *.md files.
 (add-to-list 'auto-mode-alist '("\.md$" . markdown-mode))
+
+;; projectile
+(require 'projectile)
 
 ;; rainbow mode - in css, display color specifiers in the color they specify
 ;; (autoload 'rainbow-mode "rainbow-mode")
@@ -80,7 +83,7 @@
                                 ("Rakefile"   . ruby-mode)
                                 ("Capfile"   . ruby-mode)
                                 ("Gemfile"   . ruby-mode)
-				) auto-mode-alist))
+                                ) auto-mode-alist))
 
 ;; rvm
 (require 'rvm)
