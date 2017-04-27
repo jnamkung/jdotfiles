@@ -28,20 +28,18 @@
                       '(javascript-jshint)))
 ;; use eslint with web-mode for jsx files
 (flycheck-add-mode 'javascript-eslint 'web-mode)
-
-;; use eslint from ./node_modules when available
+;; use eslint from project ./node_modules or ./bin when available
 ;; see: http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
-(defun my/use-eslint-from-node-modules ()
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (eslint (and root
-                      (expand-file-name "node_modules/eslint/bin/eslint.js"
-                                        root))))
-    (when (and eslint (file-executable-p eslint))
-      (setq-local flycheck-javascript-eslint-executable eslint))))
+(defun my/use-eslint-from-local-project ()
+ (let* ((root (condition-case nil (projectile-project-root) (error nil)))
+        (eslint-node (expand-file-name "node_modules/eslint/bin/eslint.js" root))
+        (eslint-binstub (expand-file-name "bin/eslint" root)))
+   (when (file-executable-p eslint-node)
+     (setq-local flycheck-javascript-eslint-executable eslint-node))
+   (when (file-executable-p eslint-binstub)
+     (setq-local flycheck-javascript-eslint-executable eslint-binstub))))
+(add-hook 'flycheck-mode-hook #'my/use-eslint-from-local-project)
 
-(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
 ;; highlight-indentation commented out until fixed with newer web-mode:
 ;; https://github.com/antonj/Highlight-Indentation-for-Emacs/pull/27
@@ -99,20 +97,10 @@
 ;; markdown mode for *.md files.
 (add-to-list 'auto-mode-alist '("\.md$" . markdown-mode))
 
-;; php
-(add-hook 'php-mode-hook
-	  '(lambda () (define-abbrev php-mode-abbrev-table "ex" "extends")))
-(defun my-php-mode-common-hook ()
-  ;; my customizations for php-mode
-  (setq tab-width 4)
-  (setq c-basic-offset 4)
-  (c-set-offset 'topmost-intro-cont 4)
-  (c-set-offset 'class-open 0)
-  (c-set-offset 'inline-open 0)
-  (c-set-offset 'substatement-open 0)
-  (c-set-offset 'arglist-intro '+))
+;; projectile
+(require 'projectile)
 
-;; rainbow mode -- for css
+;; rainbow mode - in css, display color specifiers in the color they specify
 ;; (autoload 'rainbow-mode "rainbow-mode")
 (setq rainbow-html-colors 'auto)
 
@@ -132,7 +120,7 @@
                                 ("Rakefile"   . ruby-mode)
                                 ("Capfile"   . ruby-mode)
                                 ("Gemfile"   . ruby-mode)
-				) auto-mode-alist))
+                                ) auto-mode-alist))
 
 ;; sass - don't compile on save
 (add-hook 'scss-mode-hook
