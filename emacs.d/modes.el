@@ -32,7 +32,7 @@
                       '(javascript-jshint)))
 ;; use eslint with web-mode for jsx files
 (flycheck-add-mode 'javascript-eslint 'web-mode)
-;; use eslint from ./node_modules or ./bin when available
+;; use eslint from project ./node_modules or ./bin when available
 ;; see: http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
 (defun my/use-eslint-from-local-project ()
  (let* ((root (condition-case nil (projectile-project-root) (error nil)))
@@ -43,7 +43,6 @@
    (when (file-executable-p eslint-binstub)
      (setq-local flycheck-javascript-eslint-executable eslint-binstub))))
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-local-project)
-
 
 ;; js-mode, js2-mode
 (setq js-indent-level 2)
@@ -84,7 +83,6 @@
                                 ("Capfile"   . ruby-mode)
                                 ("Gemfile"   . ruby-mode)
                                 ) auto-mode-alist))
-
 ;; rvm
 (require 'rvm)
 (rvm-autodetect-ruby)
@@ -112,6 +110,8 @@
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
+(setq web-mode-attr-indent-offset 2)
+
 ;; tell web-mode to treat .es6 files as jsx
 (setq web-mode-content-types-alist '(("jsx"  . "\\.es6\\'")))
 ;; use web-mode for jsx - https://truongtx.me/2014/03/10/emacs-setup-jsx-mode-and-jsx-syntax-checking/
