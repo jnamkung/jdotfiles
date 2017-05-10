@@ -138,6 +138,7 @@
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
+(setq web-mode-attr-indent-offset 2)
 
 ;; tell web-mode to treat .es6 files as jsx
 (setq web-mode-content-types-alist '(("jsx"  . "\\.es6\\'")))
