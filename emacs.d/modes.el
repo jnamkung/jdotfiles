@@ -128,6 +128,8 @@
              (setq scss-compile-at-save nil)
              (setq css-indent-offset 2)))
 
+(add-hook 'scss-mode-hook 'rainbow-mode)
+
 ;; web-mode
 (add-to-list 'auto-mode-alist '("\\html.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\text.erb\\'" . web-mode))
