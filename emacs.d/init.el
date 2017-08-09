@@ -115,6 +115,12 @@
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
+(eval-after-load "compile"
+  '(progn
+     ;; For eslint:
+     (add-to-list 'compilation-error-regexp-alist
+		  '("^\\(/[^\":\n]+\\)\n *\\([0-9]+\\):[0-9]+ +\\(error\\|warning\\) +" 1 2))))
+
 ;; DO THIS LAST
 
 ;; load .emacs_local.el, if present
