@@ -21,8 +21,3 @@ source ~/.bash/colorfixes
 
 # Use .localrc for settings specific to one system
 [[ -s "$HOME/.localrc" ]] && source "$HOME/.localrc"
-
-# RVM comes last
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

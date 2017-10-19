@@ -69,9 +69,9 @@ move_to_front () {
     r=$2
     for dir in $p
     do
-	if [ "$dir" != "$2" ] && [ "$dir/" != "$2" ] ; then
-	    append_to_listvar r "$dir"
-	fi
+        if [ "$dir" != "$2" ] && [ "$dir/" != "$2" ] ; then
+            append_to_listvar r "$dir"
+        fi
     done
     eval "$1=$r"
 }
@@ -80,44 +80,47 @@ move_to_front () {
 # ## End function definitions
 # ##
 
-# # we're going to work with paths separated by ":" instead of whitespace
-IFS=:
+if [ -z ${PATHS_GROOMED+y} ] ; then
+    # # we're going to work with paths separated by ":" instead of whitespace
+    IFS=:
 
-# fix Apple's default PATH, which puts /usr/local/bin after /usr/bin,
-#  which breaks Homebrew-installed stuff
+    # fix Apple's default PATH, which puts /usr/local/bin after /usr/bin,
+    #  which breaks Homebrew-installed stuff
 
-if (list_contains PATH "/usr/local/bin") || (list_contains PATH "/usr/local/bin/") ; then
-    move_to_front PATH "/usr/local/bin"
-fi
-
-for dir in $( reverse_list $prePATH )
-do
-    if [[ -d $dir ]] || [[ -h $dir ]] ; then
-	prepend_to_listvar PATH "$dir"
+    if (list_contains PATH "/usr/local/bin") || (list_contains PATH "/usr/local/bin/") ; then
+        move_to_front PATH "/usr/local/bin"
     fi
-done
 
-for dir in $postPATH
-do
-    if ( [ -d $dir ] || [ -h $dir ] ) ; then
-	append_to_listvar PATH "$dir"
-    fi
-done
+    for dir in $( reverse_list $prePATH )
+    do
+        if [[ -d $dir ]] || [[ -h $dir ]] ; then
+            prepend_to_listvar PATH "$dir"
+        fi
+    done
 
-if [ -n "$MANPATH" ]; then
-    for dir in $( reverse_list $preMANPATH )
+    for dir in $postPATH
     do
         if ( [ -d $dir ] || [ -h $dir ] ) ; then
-            prepend_to_listvar MANPATH "$dir"
-	fi
+            append_to_listvar PATH "$dir"
+        fi
     done
-    for dir in $postMANPATH
-    do
-        if ( [ -d $dir ] || [ -h $dir ] ) ; then
-            append_to_listvar MANPATH "$dir"
-	fi
-    done
-fi
 
-# # put IFS back
-unset IFS
+    if [ -n "$MANPATH" ]; then
+        for dir in $( reverse_list $preMANPATH )
+        do
+            if ( [ -d $dir ] || [ -h $dir ] ) ; then
+                prepend_to_listvar MANPATH "$dir"
+            fi
+        done
+        for dir in $postMANPATH
+        do
+            if ( [ -d $dir ] || [ -h $dir ] ) ; then
+                append_to_listvar MANPATH "$dir"
+            fi
+        done
+    fi
+
+    # # put IFS back
+    unset IFS
+    export PATHS_GROOMED="y"
+fi
