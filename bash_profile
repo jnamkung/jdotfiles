@@ -14,3 +14,6 @@ source $HOME/.bash/better-paths
 
 # Load RVM as a function
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# note: dedupe_path is defined in better-paths, loaded above
+dedupe_path
