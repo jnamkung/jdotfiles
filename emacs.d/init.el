@@ -107,6 +107,26 @@
  ;; If there is more than one, they won't work right.
  )
 
+(require 'bs)
+(global-set-key (kbd "C-x C-b") 'bs-show) ; better buffer listings
+(global-set-key (kbd "M-s")     'fixup-whitespace) ; best function ever
+
+(require 'ruby-mode)
+(define-key ruby-mode-map (kbd "C-c C-z") 'xmp)
+
+(savehist-mode 1)
+
+(global-set-key (kbd "C-c r") 'revert-buffer)
+
+;; magit
+(global-set-key (kbd "C-x g") 'magit-status)
+
+(eval-after-load "compile"
+  '(progn
+     ;; For eslint:
+     (add-to-list 'compilation-error-regexp-alist
+                  '("^\\(/[^\":\n]+\\)\n *\\([0-9]+\\):[0-9]+ +\\(error\\|warning\\) +" 1 2))))
+
 ;; DO THIS LAST - load local user config
 
 ;; load .emacs_local.el, if present
