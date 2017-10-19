@@ -91,6 +91,7 @@ dedupe_path () {
         append_to_listvar newPATH "$dir"
     done
     unset IFS
+    newPATH=${newPATH#':'} # remove the leading ':', (we appended to '')
     export PATH=$newPATH
 }
 
