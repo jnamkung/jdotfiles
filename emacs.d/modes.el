@@ -65,9 +65,11 @@
 (setq rainbow-html-colors 'auto)
 
 ;; robe
-;;  prevent "WARNING: terminal is not fully functional" when inf-ruby starts
-(setenv "PAGER" "cat")
+;;   first tell inf-ruby to always use the 'development' Rails environment, instead of prompting.
+(setq inf-ruby-console-environment "development")
 (add-hook 'ruby-mode-hook 'robe-mode)
+(defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
+  (rvm-activate-corresponding-ruby))
 
 ;; ruby
 (require 'ruby-mode)
