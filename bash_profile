@@ -9,5 +9,11 @@
 # .bashrc is read by subshells. This will make login shells read it too.
 [[ -s "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
 
-# load path fixer-upper last
+# load path fixer-upper after loading all other config files, BEFORE setting up rvm
 source $HOME/.bash/better-paths
+
+# Load RVM as a function
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# note: dedupe_path is defined in better-paths, loaded above
+dedupe_path

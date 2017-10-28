@@ -6,12 +6,19 @@
 # ### Add your dirs to [pre|post]PATH and [pre|post]MANPATH below.
 # ###   Dirs already in your PATH/MANPATH won't be added.
 # ###   Dirs that don't exist on your system won't be added.
-# ###   Dirs will be *prepended* to your PATH/MANPATH, order preserved.
 # ###
 
-prePATH="$HOME/bin:$HOME/.scripts:$HOME/.rvm/bin:/usr/local/mysql/bin:/usr/local/git/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin"
+prePATH="$HOME/bin:$HOME/.scripts"
 
-postPATH=""
+# .rvm/bin should be last
+postPATH="$HOME/.rvm/bin"
+
+# don't explode if yarn isn't installed
+if [ `command -v yarn` ]; then
+    # this adds the directory where yarn keeps executables for packages it installs,
+    #   (not the directory where yarn itself is installed)
+    postPATH="`yarn global bin`:$postPATH"
+fi
 
 preMANPATH="/usr/local/mysql/man:/usr/local/git/man:/usr/local/man:/opt/local/man"
 
@@ -69,38 +76,44 @@ move_to_front () {
     r=$2
     for dir in $p
     do
-	if [ "$dir" != "$2" ] && [ "$dir/" != "$2" ] ; then
-	    append_to_listvar r "$dir"
-	fi
+        if [ "$dir" != "$2" ] && [ "$dir/" != "$2" ] ; then
+            append_to_listvar r "$dir"
+        fi
     done
     eval "$1=$r"
+}
+
+dedupe_path () {
+    IFS=:
+    newPATH=''
+    for dir in $PATH
+    do
+        append_to_listvar newPATH "$dir"
+    done
+    unset IFS
+    newPATH=${newPATH#':'} # remove the leading ':', (we appended to '')
+    export PATH=$newPATH
 }
 
 # ##
 # ## End function definitions
 # ##
 
+
 # # we're going to work with paths separated by ":" instead of whitespace
 IFS=:
-
-# fix Apple's default PATH, which puts /usr/local/bin after /usr/bin,
-#  which breaks Homebrew-installed stuff
-
-if (list_contains PATH "/usr/local/bin") || (list_contains PATH "/usr/local/bin/") ; then
-    move_to_front PATH "/usr/local/bin"
-fi
 
 for dir in $( reverse_list $prePATH )
 do
     if [[ -d $dir ]] || [[ -h $dir ]] ; then
-	prepend_to_listvar PATH "$dir"
+        prepend_to_listvar PATH "$dir"
     fi
 done
 
 for dir in $postPATH
 do
     if ( [ -d $dir ] || [ -h $dir ] ) ; then
-	append_to_listvar PATH "$dir"
+        append_to_listvar PATH "$dir"
     fi
 done
 
@@ -109,13 +122,13 @@ if [ -n "$MANPATH" ]; then
     do
         if ( [ -d $dir ] || [ -h $dir ] ) ; then
             prepend_to_listvar MANPATH "$dir"
-	fi
+        fi
     done
     for dir in $postMANPATH
     do
         if ( [ -d $dir ] || [ -h $dir ] ) ; then
             append_to_listvar MANPATH "$dir"
-	fi
+        fi
     done
 fi
 
