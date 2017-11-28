@@ -87,7 +87,7 @@
  '(coffee-tab-width 2)
  '(custom-safe-themes
    (quote
-    ("8fed5e4b89cf69107d524c4b91b4a4c35bcf1b3563d5f306608f0c48f580fdf8" "90edd91338ebfdfcd52ecd4025f1c7f731aced4c9c49ed28cfbebb3a3654840b" "f0a99f53cbf7b004ba0c1760aa14fd70f2eabafe4e62a2b3cf5cabae8203113b" "8ac31e1bc1920b33d478dfafb0b45989a00ede15a2388ea16093e7d0988c48d0" "60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" "16248150e4336572ff4aa21321015d37c3744a9eb243fbd1e934b594ff9cf394" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
+    ("235dc2dd925f492667232ead701c450d5c6fce978d5676e54ef9ca6dd37f6ceb" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" "8fed5e4b89cf69107d524c4b91b4a4c35bcf1b3563d5f306608f0c48f580fdf8" "90edd91338ebfdfcd52ecd4025f1c7f731aced4c9c49ed28cfbebb3a3654840b" "f0a99f53cbf7b004ba0c1760aa14fd70f2eabafe4e62a2b3cf5cabae8203113b" "8ac31e1bc1920b33d478dfafb0b45989a00ede15a2388ea16093e7d0988c48d0" "60f04e478dedc16397353fb9f33f0d895ea3dab4f581307fbf0aa2f07e658a40" "16248150e4336572ff4aa21321015d37c3744a9eb243fbd1e934b594ff9cf394" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(package-selected-packages
    (quote
     (projectile yaml-mode web-mode string-inflection slim-mode scss-mode rvm robe rainbow-mode multiple-cursors markdown-mode magit json-mode js2-mode highlight-indentation flycheck expand-region ensime dropdown-list coffee-mode auto-complete applescript-mode ag)))
@@ -120,6 +120,9 @@
      ;; For eslint:
      (add-to-list 'compilation-error-regexp-alist
 		  '("^\\(/[^\":\n]+\\)\n *\\([0-9]+\\):[0-9]+ +\\(error\\|warning\\) +" 1 2))))
+
+;; added this to enable debugging in rspec buffers.
+(add-hook 'after-init-hook 'inf-ruby-switch-setup)
 
 ;; DO THIS LAST
 
