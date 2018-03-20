@@ -10,11 +10,6 @@
 ;; ;; (add-to-list 'ac-modes 'enh-ruby-mode)
 ;; (add-to-list 'ac-modes 'web-mode)
 
-;; coffee
-(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
-(add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
-(custom-set-variables '(coffee-tab-width 2))
-
 ;; expand-region
 (require 'expand-region)
 (global-set-key (kbd "C-c o") 'er/expand-region)
@@ -61,6 +56,11 @@
 (add-to-list 'load-path "~/.emacs.d/io-mode")
 (autoload 'io-mode "io-mode" "Mode for editing Io files" t)
 (add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
+
+;; prettier
+(require 'prettier-js)
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+(add-hook 'web-mode-hook 'prettier-js-mode)
 
 ;; js-mode, js2-mode
 (setq js-indent-level 2)
