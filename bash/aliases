@@ -26,14 +26,6 @@ if type 'source-highlight' > /dev/null 2>&1; then
     export -f shl
 fi
 
-# Override RAILS_PRODUCTION_ROOT in your .localrc as needed
-RAILS_PRODUCTION_ROOT=/www/hol/current
-railsp() { cd $RAILS_PRODUCTION_ROOT; RAILS_ENV="production" bundle exec rails $@; }
-export -f railsp
-rakep() { cd $RAILS_PRODUCTION_ROOT; RAILS_ENV="production" bundle exec rake $@; }
-export -f rakep
-alias rpc="railsp c"
-
 alias sa="source ~/.bash/aliases"
 alias ll="ls -l"
 alias la='ls -A'
@@ -47,8 +39,6 @@ alias rr="rake routes | less -S"
 alias rdm="rake db:migrate"
 alias rdr="rake db:rollback"
 alias rdmt="RAILS_ENV=test rake db:migrate"
-alias hol="cd ~/Projects/hol/"
-alias holr="cd ~/Projects/hol-rails/"
 alias ackphp="ack --ignore-dir=tests --php"
 alias arg="ag --ignore-dir=tmp --ignore-dir=log"
 alias dush="du -sh ."

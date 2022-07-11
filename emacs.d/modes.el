@@ -53,7 +53,8 @@
 ;;          (lambda () (highlight-indentation-current-column-mode)))
 
 ;; io -- Note: as of 9/2013 there was no io-mode on marmalade.
-(add-to-list 'load-path "~/.emacs.d/io-mode")
+;(add-to-list 'load-path "~/.emacs.d/io-mode")
+(add-to-list 'load-path "/Users/ju/.emacs.d/io-mode")
 (autoload 'io-mode "io-mode" "Mode for editing Io files" t)
 (add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
 
@@ -155,7 +156,7 @@
 ;; Yasnippet
 (require 'yasnippet)
 ;; use the nice dropdown-list widget, instead of selecting snippets in the minibuffer
-(require 'dropdown-list)
+; (require 'dropdown-list)
 (setq yas-prompt-functions '(yas-dropdown-prompt
                              yas-ido-prompt
                              yas-completing-prompt))

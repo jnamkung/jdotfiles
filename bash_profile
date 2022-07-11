@@ -17,3 +17,12 @@ source $HOME/.bash/better-paths
 
 # note: dedupe_path is defined in better-paths, loaded above
 dedupe_path
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/ju/local/bin/google-cloud-sdk/path.bash.inc' ]; then . '/Users/ju/local/bin/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/ju/local/bin/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/ju/local/bin/google-cloud-sdk/completion.bash.inc'; fi
+
+# silence new macOS shell warning
+export BASH_SILENCE_DEPRECATION_WARNING=1
