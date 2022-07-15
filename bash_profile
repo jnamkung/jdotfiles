@@ -15,8 +15,8 @@ source $HOME/.bash/better-paths
 # Load RVM as a function
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-# note: dedupe_path is defined in better-paths, loaded above
-dedupe_path
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/ju/local/bin/google-cloud-sdk/path.bash.inc' ]; then . '/Users/ju/local/bin/google-cloud-sdk/path.bash.inc'; fi
@@ -26,3 +26,10 @@ if [ -f '/Users/ju/local/bin/google-cloud-sdk/completion.bash.inc' ]; then . '/U
 
 # silence new macOS shell warning
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# note: dedupe_path is defined in better-paths, loaded above
+dedupe_path
